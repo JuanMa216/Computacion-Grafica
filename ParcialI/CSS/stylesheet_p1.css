@@ -1,5 +1,5 @@
 * {
-    background-color: #f3e5d4;
+    background-color: #f8e5cf;
     margin: 0;
     box-sizing: border-box;
 }
@@ -84,7 +84,7 @@
 .square1 {
     width: 70%;
     height: 70%;
-    background-color: #f3e5d4;
+    background-color: #f8e5cf;
     margin: 20px;
     display: flex;
     justify-content: center;  
@@ -99,7 +99,7 @@
 }
 
 .grid-item.item5{
-    background-color: #f3e5d4;
+    background-color: #f8e5cf;
     height: 300px;
     border-radius: 5px;
     display: flex;
@@ -115,7 +115,7 @@
 }
 
 .grid-item.item6{
-    background-color: #f3e5d4;
+    background-color: #f8e5cf;
     height: 300px;
     border-radius: 5px;
     display: flex;
@@ -131,7 +131,7 @@
 }
 
 .grid-item.item7{
-    background-color: #f3e5d4;
+    background-color: #f8e5cf;
     height: 300px;
     border-radius: 5px;
     display: flex;
