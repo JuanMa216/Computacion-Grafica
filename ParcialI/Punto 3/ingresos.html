@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/ingresos.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="main-container">
+        <nav class="navbar">
+            <div class="search-container">
+                <i data-lucide="search" class="icon-search"></i>
+                <input type="text" placeholder="Buscar transacciones, cuentas...">
+            </div>
+
+            <div class="navbar-right">
+                <div class="date-selector">
+                    <span class="icon-calendar"><i data-lucide="calendar"></i></span>
+                    <span class="date-text">Hoy</span>
+                </div>
+
+                <button class="btn-notifications">
+                    <span class="icon-bell"><i data-lucide="bell"></i></span>
+                    <span class="badge"></span>
+                </button>
+
+                <div class="user-profile">
+                    <i data-lucide="user" class="icon-user"></i>
+                    <div class="user-info">
+                        <span class="name">Milis Amper</span>
+                        <span class="role">CEO</span>
+                    </div>
+                </div>
+            </div>      
+        </nav>
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon-logo"><i data-lucide="layout-dashboard"></i></span>
+                <h2>MilisFinanzas</h2>
+            </div>
+
+            <nav class="menu-sidebar">
+                <a href="#" class="menu-item">Inicio</a>
+                <a href="#" class="menu-item activo"><span><i data-lucide="trending-up"></i></span>Ingresos</a>
+                <a href="#" class="menu-item">Gastos</a>
+                <a href="#" class="menu-item">Reportes</a>
+            </nav>
+
+            <a href="#" class="btn-cerrar-sesion">
+                <span class="icon-cerrar-sesion"><i data-lucide="log-out"></i></span>
+                Cerrar Sesión
+            </a>
+        </aside>
+        <div class="content">
+            <header class="content-header">
+                <div class="header-text">
+                    <span class="eyebrow">TESORERÍA CORPORATIVA • Q4 2024</span>
+                    <h1>Gestión de Ingresos</h1>
+                    <p>Registro, fuentes de facturación y cobros consolidados del periodo operativo en curso.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-outline"><i data-lucide="download"></i> Exportar Reporte</button>
+                    <button class="btn-primary"><i data-lucide="plus"></i> Registrar Nuevo Ingreso</button>
+                </div>
+            </header>
+            <div class="metrics-row">
+                <div class="kpi-card">
+                    <h3>Total Facturado</h3>
+                    <p class="amount">$45,200.00</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Cobrado Efectivo</h3>
+                    <p class="amount">$38,420.00</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Pendiente de Cobro</h3>
+                    <p class="amount danger">$6,780.00</p>
+                </div>  
+                <div class="kpi-card">
+                    <h3>Tasa de Conversión</h3>
+                    <p class="amount">85.0%</p>
+                </div>
+            </div>  
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3>Fuentes Principales de Ingreso</h3>
+                    <p>Distribución de facturación acumulada del trimestre por canal de venta.</p>
+                </div>
+            </div>
+            <div class="highlight-card">
+                <h3>Cliente Destacado</h3>
+            </div>
+        </div>
+    </div>
+<script>
+lucide.createIcons();
+</script>
+</body>
+</html>
