@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinControl - Reportes</title>
+    <link rel="stylesheet" href="CSS/reportes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon-logo"><i data-lucide="bar-chart-2"></i></span>
+                <h2>FinControl</h2>
+            </div>
+
+            <<nav class="menu-sidebar">
+                <a href="inicio.html" class="menu-item"><i data-lucide="layout-grid"></i> Inicio</a>
+                <a href="ingresos.html" class="menu-item"><i data-lucide="trending-up"></i> Ingresos</a>
+                <a href="gastos.html" class="menu-item"><i data-lucide="trending-down"></i> Gastos</a>
+                <a href="reportes.html" class="menu-item"><i data-lucide="bar-chart"></i> Reportes</a>
+            </nav>
+
+            <a href="login.html" class="btn-cerrar-sesion">
+                <i data-lucide="log-out"></i> Cerrar Sesión
+            </a>
+        </aside>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="search-container">
+                <i data-lucide="search" class="icon-search"></i>
+                <input type="text" placeholder="Buscar transacciones, cuentas...">
+            </div>
+
+            <div class="navbar-right">
+                <div class="date-selector">
+                    <i data-lucide="calendar"></i>
+                    <span class="date-text">Este mes: Octubre 2026</span>
+                </div>
+
+                <button class="btn-notification">
+                    <i data-lucide="bell"></i>
+                    <span class="badge-dot"></span>
+                </button>
+
+                <div class="user-profile">
+                    <img src="assets/Profile.png" alt="Elena Rostova" class="avatar">
+                    <div class="user-info">
+                        <span class="name">Elena Rostova</span>
+                        <span class="role">• Directora Financiera</span>
+                    </div>
+                </div>
+            </div>      
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            
+            <!-- Header -->
+            <header class="content-header">
+                <div class="header-text">
+                    <span class="eyebrow">AUDITORÍA & RENDIMIENTO CORPORATIVO <span class="text-green ml-10">Q1 2026 REF: AUD-9021</span></span>
+                    <h1>Reportes Financieros y <br> Analítica</h1>
+                    <p>Consolidación contable de balances, proyecciones <br> cuantitativas y estados de liquidez patrimonial para el <br> comité directivo.</p>
+                </div>
+                <div class="header-actions-col">
+                    <div class="toggle-group">
+                        <button class="toggle-btn active">Trimestre Q1 2026</button>
+                        <button class="toggle-btn">Año Completo</button>
+                        <button class="toggle-btn">Personalizado</button>
+                    </div>
+                    <button class="btn-primary w-full"><i data-lucide="file-text"></i> Descargar Reporte Ejecutivo (PDF)</button>
+                </div>
+            </header>
+
+            <!-- KPIs -->
+            <div class="metrics-row">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>MARGEN OPERATIVO NETO</h3>
+                        <div class="icon-box icon-green-light"><i data-lucide="pie-chart"></i></div>
+                    </div>
+                    <p class="amount">38.2%</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-green"><i data-lucide="arrow-up-right" class="small-icon"></i> 4.4%</span>
+                        <span class="text-muted">vs Q4</span>
+                        <span class="text-muted ml-auto">Objetivo: 35.0%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>EBITDA ESTIMADO</h3>
+                        <div class="icon-box icon-blue-light"><i data-lucide="building"></i></div>
+                    </div>
+                    <p class="amount">$23,570.0</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-blue"><i data-lucide="arrow-up-right" class="small-icon"></i> 12.0%</span>
+                        <span class="text-muted">YTD Crecimiento</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>FLUJO DE CAJA LIBRE</h3>
+                        <div class="icon-box icon-teal"><i data-lucide="trending-up"></i></div>
+                    </div>
+                    <p class="amount">$18,920.0</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-teal"><i data-lucide="check-circle" class="small-icon"></i> Solvente</span>
+                        <span class="text-muted">Ratio: 1.48x</span>
+                    </div>
+                </div>  
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>BURN RATE MENSUAL</h3>
+                        <div class="icon-box icon-red-light"><i data-lucide="flame"></i></div>
+                    </div>
+                    <p class="amount">$14,850.0</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-red"><i data-lucide="arrow-down-right" class="small-icon"></i> 3.1%</span>
+                        <span class="text-red font-semibold">optimizado</span>
+                        <span class="text-muted ml-auto">Pista: 21 meses</span>
+                    </div>
+                </div>
+            </div>  
+
+            <!-- Sección Media: Libros y Gráfica -->
+            <div class="middle-row">
+                
+                <!-- Formatos y Libros -->
+                <div class="books-section">
+                    <div class="section-title-row">
+                        <div>
+                            <h2>Formatos y Libros Contables</h2>
+                            <p class="text-muted">Descarga o previsualiza los balances según normativas IFRS y locales.</p>
+                        </div>
+                        <span class="badge badge-gray">4 Módulos Activos</span>
+                    </div>
+
+                    <div class="books-grid">
+                        
+                        <div class="book-card">
+                            <div class="book-header">
+                                <div class="icon-box-small icon-blue"><i data-lucide="bar-chart-2"></i></div>
+                                <span class="tag-blue">Oficial Trimestral</span>
+                            </div>
+                            <h3>Estado de Resultados (P&L)</h3>
+                            <p>Desglose secuencial de ingresos brutos, gastos operacionales (COGS), EBITDA e impuesto corporativo neto.</p>
+                            
+                            <div class="book-data">
+                                <div class="data-row"><span>Ingreso Bruto Facturado:</span> <strong>$94,200.00</strong></div>
+                                <div class="data-row"><span>Gastos de Explotación:</span> <strong class="text-red">-$58,210.00</strong></div>
+                                <div class="data-row border-top">
+                                    <span class="font-semibold text-green">Utilidad Neta Declarada:</span> 
+                                    <strong class="text-green">$35,990.00</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="book-actions">
+                                <button class="btn-preview"><i data-lucide="eye"></i> Previsualizar</button>
+                                <button class="btn-icon-only"><i data-lucide="download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="book-card">
+                            <div class="book-header">
+                                <div class="icon-box-small icon-teal"><i data-lucide="scale"></i></div>
+                                <span class="tag-teal">Auditado</span>
+                            </div>
+                            <h3>Balance General y Patrimonio</h3>
+                            <p>Valuación patrimonial: Activos corrientes vs. Pasivos de corto y largo plazo con capital contable accionario.</p>
+                            
+                            <div class="book-data">
+                                <div class="data-row"><span>Total Activo Corriente:</span> <strong>$312,400.00</strong></div>
+                                <div class="data-row"><span>Pasivo Total Consolidado:</span> <strong class="text-red">$104,180.00</strong></div>
+                                <div class="data-row border-top">
+                                    <span class="font-semibold text-green">Patrimonio Neto Líquido:</span> 
+                                    <strong class="text-green">$208,220.00</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="book-actions">
+                                <button class="btn-preview"><i data-lucide="eye"></i> Previsualizar</button>
+                                <button class="btn-icon-only"><i data-lucide="download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="book-card">
+                            <div class="book-header">
+                                <div class="icon-box-small icon-blue"><i data-lucide="file-check"></i></div>
+                                <span class="tag-blue">100% Emparejado</span>
+                            </div>
+                            <h3>Informe de Conciliación Bancaria</h3>
+                            <p>Cruce integral de asientos en libros versus extractos de tesorería en entidades Santander, BBVA y Chase.</p>
+                            
+                            <div class="book-data">
+                                <div class="data-row"><span>Transacciones auditadas:</span> <strong>1,428 ops</strong></div>
+                                <div class="data-row border-top">
+                                    <span>Discrepancias no resueltas:</span> 
+                                    <strong class="text-green">$0.00 (0)</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="book-actions mt-auto">
+                                <button class="btn-preview"><i data-lucide="eye"></i> Previsualizar</button>
+                                <button class="btn-icon-only"><i data-lucide="download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="book-card">
+                            <div class="book-header">
+                                <div class="icon-box-small icon-purple"><i data-lucide="trending-up"></i></div>
+                                <span class="tag-purple">Modelo Predictivo</span>
+                            </div>
+                            <h3>Proyección de Flujo (6 Meses)</h3>
+                            <p>Simulación predictiva de entradas y obligaciones financieras según estacionalidad y cobranzas vencidas.</p>
+                            
+                            <div class="book-data">
+                                <div class="data-row"><span>Caja Proyectada (Agosto 2026):</span> <strong class="text-green">$184,300.00</strong></div>
+                                <!-- Espacio para simular la gráfica de línea que está en la tarjeta -->
+                                <div class="mini-chart-mock mt-10">
+                                    <svg viewBox="0 0 100 30" width="100%" height="40">
+                                        <path d="M0 25 Q 25 20 50 15 T 100 5 L 100 30 L 0 30 Z" fill="#d1fae5" />
+                                        <path d="M0 25 Q 25 20 50 15 T 100 5" fill="none" stroke="#059669" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="book-actions mt-auto">
+                                <button class="btn-preview"><i data-lucide="eye"></i> Previsualizar</button>
+                                <button class="btn-icon-only"><i data-lucide="download"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Distribución por Cuenta -->
+                <div class="distribution-card">
+                    <div class="card-header-flex">
+                        <h3>Distribución por Cuenta</h3>
+                        <i data-lucide="more-vertical" class="icon-muted cursor-pointer"></i>
+                    </div>
+                    <p class="text-muted text-sm mb-20">Ponderación porcentual de activos operativos en tesorería.</p>
+                    
+                    <div class="donut-chart-wrapper">
+                        <div class="donut-chart-reportes">
+                            <div class="donut-inner">
+                                <strong>$284.5k</strong>
+                                <span>TOTAL FONDOS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="account-list">
+                        <div class="account-item">
+                            <div class="acc-label"><span class="dot bg-dark-green"></span> Cuentas Corrientes (52%)</div>
+                            <strong>$147,940</strong>
+                        </div>
+                        <div class="account-item">
+                            <div class="acc-label"><span class="dot bg-teal"></span> Fondos Inversión (28%)</div>
+                            <strong>$79,660</strong>
+                        </div>
+                        <div class="account-item">
+                            <div class="acc-label"><span class="dot bg-gray-blue"></span> Reserva de Emergencia (20%)</div>
+                            <strong>$56,900</strong>
+                        </div>
+                    </div>
+
+                    <div class="validation-badge">
+                        <i data-lucide="check-circle-2" class="text-green"></i>
+                        <div>
+                            <strong>Validado por Dpto. Fiscal</strong>
+                            <span>PwC Certificación No. 883-294</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla Comparativa -->
+            <div class="table-section mt-24">
+                <div class="table-filters">
+                    <div>
+                        <h2>Comparativa Trimestral de Rendimiento</h2>
+                        <p class="text-muted">Evolución de márgenes brutos, gastos absorbidos y variaciones netas consecutivas.</p>
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-secondary"><i data-lucide="sliders-horizontal"></i> Filtros Avanzados</button>
+                        <button class="btn-secondary"><i data-lucide="download"></i> Exportar Tabla</button>
+                    </div>
+                </div>
+
+                <table class="data-table reportes-table">
+                    <thead>
+                        <tr>
+                            <th>MÉTRICA FINANCIERA</th>
+                            <th>Q2 2025</th>
+                            <th>Q3 2025</th>
+                            <th>Q4 2025</th>
+                            <th class="current-col">Q1 2026 (ACTUAL)</th>
+                            <th>Δ VARIACIÓN YOY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="dot dot-green"></span> <strong>Ingresos Consolidados</strong></td>
+                            <td>$78,450.00</td>
+                            <td>$82,100.00</td>
+                            <td>$89,320.00</td>
+                            <td class="current-col font-semibold">$94,200.00</td>
+                            <td><span class="tag-green">+20.07%</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="dot dot-red"></span> <strong>Egresos Consolidados</strong></td>
+                            <td>$52,100.00</td>
+                            <td>$54,900.00</td>
+                            <td>$56,120.00</td>
+                            <td class="current-col font-semibold">$58,210.00</td>
+                            <td><span class="tag-red">+11.72%</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="dot dot-blue"></span> <strong>EBITDA Operativo</strong></td>
+                            <td>$19,200.00</td>
+                            <td>$20,500.00</td>
+                            <td>$22,400.00</td>
+                            <td class="current-col font-semibold">$23,570.00</td>
+                            <td><span class="tag-blue">+22.76%</span></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td>
+                                <div class="flex-align text-green font-semibold">
+                                    <i data-lucide="check-circle" class="small-icon mr-2"></i> Utilidad Neta (Net Income)
+                                </div>
+                            </td>
+                            <td class="font-semibold">$26,350.00</td>
+                            <td class="font-semibold">$27,300.00</td>
+                            <td class="font-semibold">$33,200.00</td>
+                            <td class="current-col font-semibold text-green">$35,990.00</td>
+                            <td><span class="tag-green">+36.58%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Envío Automatizado -->
+            <div class="automation-card mt-24">
+                <div class="auto-icon">
+                    <i data-lucide="mail"></i>
+                </div>
+                <div class="auto-content">
+                    <h2>Envío Automatizado a Despacho Contable</h2>
+                    <p class="text-muted mt-5">Configure el despacho sin intervención de los cierres mensuales. Los paquetes compilados con firma criptográfica se remitirán a la dirección asignada los días 1 de cada mes.</p>
+                    
+                    <div class="auto-details mt-10">
+                        <span class="text-sm"><i data-lucide="check" class="small-icon"></i> Formato: PDF Ejecutivo + Excel Audit</span>
+                        <span class="text-sm"><i data-lucide="check" class="small-icon"></i> Destinatario: <strong>contabilidad_general@fincontrol-corp.com</strong></span>
+                    </div>
+                </div>
+                <div class="auto-actions">
+                    <div class="date-input">
+                        <i data-lucide="calendar"></i>
+                        <span>Día 1 de cada mes (08:00 AM)</span>
+                    </div>
+                    <button class="btn-primary"><i data-lucide="send"></i> Programar Envío Mensual</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
