@@ -1,14 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FinControl - Ingresos</title>
     <link rel="stylesheet" href="CSS/ingresos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon-logo"><i data-lucide="bar-chart-2"></i></span>
+                <h2>FinControl</h2>
+            </div>
+
+            <nav class="menu-sidebar">
+                <a href="#" class="menu-item"><i data-lucide="layout-grid"></i> Inicio</a>
+                <a href="#" class="menu-item activo"><i data-lucide="trending-up"></i> Ingresos</a>
+                <a href="#" class="menu-item"><i data-lucide="trending-down"></i> Gastos</a>
+                <a href="#" class="menu-item"><i data-lucide="bar-chart"></i> Reportes</a>
+            </nav>
+
+            <a href="#" class="btn-cerrar-sesion">
+                <i data-lucide="log-out"></i> Cerrar Sesión
+            </a>
+        </aside>
+
         <nav class="navbar">
             <div class="search-container">
                 <i data-lucide="search" class="icon-search"></i>
@@ -17,46 +37,30 @@
 
             <div class="navbar-right">
                 <div class="date-selector">
-                    <span class="icon-calendar"><i data-lucide="calendar"></i></span>
-                    <span class="date-text">Hoy</span>
+                    <i data-lucide="calendar"></i>
+                    <span class="date-text">Este mes: Octubre 2026</span>
                 </div>
 
-                <button class="btn-notifications">
-                    <span class="icon-bell"><i data-lucide="bell"></i></span>
-                    <span class="badge"></span>
+                <button class="btn-notification">
+                    <i data-lucide="bell"></i>
+                    <span class="badge-dot"></span>
                 </button>
 
                 <div class="user-profile">
-                    <i data-lucide="user" class="icon-user"></i>
+                    <img src="assets/Profile.png" alt="Elena Rostova" class="avatar">
                     <div class="user-info">
-                        <span class="name">Milis Amper</span>
-                        <span class="role">CEO</span>
+                        <span class="name">Elena Rostova</span>
+                        <span class="role">• Directora Financiera</span>
                     </div>
                 </div>
             </div>      
         </nav>
-        <aside class="sidebar">
-            <div class="logo">
-                <span class="icon-logo"><i data-lucide="layout-dashboard"></i></span>
-                <h2>MilisFinanzas</h2>
-            </div>
 
-            <nav class="menu-sidebar">
-                <a href="#" class="menu-item">Inicio</a>
-                <a href="#" class="menu-item activo"><span><i data-lucide="trending-up"></i></span>Ingresos</a>
-                <a href="#" class="menu-item">Gastos</a>
-                <a href="#" class="menu-item">Reportes</a>
-            </nav>
-
-            <a href="#" class="btn-cerrar-sesion">
-                <span class="icon-cerrar-sesion"><i data-lucide="log-out"></i></span>
-                Cerrar Sesión
-            </a>
-        </aside>
-        <div class="content">
+        <main class="content">
+            
             <header class="content-header">
                 <div class="header-text">
-                    <span class="eyebrow">TESORERÍA CORPORATIVA • Q4 2024</span>
+                    <span class="eyebrow">TESORERÍA CORPORATIVA • Q4 2026</span>
                     <h1>Gestión de Ingresos</h1>
                     <p>Registro, fuentes de facturación y cobros consolidados del periodo operativo en curso.</p>
                 </div>
@@ -65,37 +69,235 @@
                     <button class="btn-primary"><i data-lucide="plus"></i> Registrar Nuevo Ingreso</button>
                 </div>
             </header>
+
             <div class="metrics-row">
                 <div class="kpi-card">
                     <h3>Total Facturado</h3>
                     <p class="amount">$45,200.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-green"><i data-lucide="trending-up" class="small-icon"></i> +14.2%</span>
+                        <span class="text-muted">vs. mes anterior</span>
+                    </div>
                 </div>
                 <div class="kpi-card">
                     <h3>Cobrado Efectivo</h3>
                     <p class="amount">$38,420.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-light-green"><i data-lucide="check-circle" class="small-icon"></i> 85.0%</span>
+                        <span class="text-muted">liquidado en cuenta bancaria</span>
+                    </div>
                 </div>
                 <div class="kpi-card">
                     <h3>Pendiente de Cobro</h3>
                     <p class="amount danger">$6,780.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-red">3 facturas</span>
+                        <span class="text-muted">vencimiento < 15 días</span>
+                    </div>
                 </div>  
                 <div class="kpi-card">
-                    <h3>Tasa de Conversión</h3>
-                    <p class="amount">85.0%</p>
+                    <div class="kpi-header-flex">
+                        <h3>Tasa de Conversión</h3>
+                        <i data-lucide="target" class="icon-muted"></i>
+                    </div>
+                    <p class="amount">85.0<span>%</span></p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="kpi-footer">
+                        <span class="text-muted">Objetivo: 80% <strong class="text-green">+5% superior</strong></span>
+                    </div>
                 </div>
             </div>  
-            <div class="chart-card">
-                <div class="card-header">
-                    <h3>Fuentes Principales de Ingreso</h3>
-                    <p>Distribución de facturación acumulada del trimestre por canal de venta.</p>
+
+            <div class="middle-row">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Fuentes Principales de Ingreso</h3>
+                            <p>Distribución de facturación acumulada del trimestre por canal de venta.</p>
+                        </div>
+                        <div class="toggle-group">
+                            <button class="toggle-btn active">Octubre</button>
+                            <button class="toggle-btn">Trimestre</button>
+                            <button class="toggle-btn">2026</button>
+                        </div>
+                    </div>
+                    
+                    <div class="segmented-bar">
+                        <div class="segment segment-1" style="width: 52%;"></div>
+                        <div class="segment segment-2" style="width: 31%;"></div>
+                        <div class="segment segment-3" style="width: 17%;"></div>
+                    </div>
+
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-header">
+                                <span class="dot dot-1"></span>
+                                <h4>Servicios Consultoría</h4>
+                                <span class="percent">52%</span>
+                            </div>
+                            <p class="legend-amount">$23,504.00</p>
+                            <p class="legend-desc">18 proyectos liquidados</p>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-header">
+                                <span class="dot dot-2"></span>
+                                <h4>Suscripciones SaaS</h4>
+                                <span class="percent">31%</span>
+                            </div>
+                            <p class="legend-amount">$14,012.00</p>
+                            <p class="legend-desc">Recurrente mensual MRR</p>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-header">
+                                <span class="dot dot-3"></span>
+                                <h4>Contratos Anuales</h4>
+                                <span class="percent">17%</span>
+                            </div>
+                            <p class="legend-amount">$7,684.00</p>
+                            <p class="legend-desc">Renovaciones automáticas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="card-header-flex">
+                        <h3>Cliente Destacado</h3>
+                        <i data-lucide="star" class="icon-muted"></i>
+                    </div>
+                    <div class="client-profile">
+                        <img src="assets/N.jpg" alt="Nordic Global Logistics" class="client-logo">
+                        <div class="client-info">
+                            <h4>Nordic Global Logistics</h4>
+                            <p>Contrato Marco Enterprise</p>
+                            <span class="client-status">Pagos puntuales • Nivel Tier 1</span>
+                        </div>
+                    </div>
+                    <div class="client-data">
+                        <div class="data-row">
+                            <span class="text-muted">Facturación este mes</span>
+                            <strong>$12,450.00</strong>
+                        </div>
+                        <div class="data-row">
+                            <span class="text-muted">Próximo cobro</span>
+                            <strong class="text-green">05 Nov 2026</strong>
+                        </div>
+                    </div>
+                    <button class="btn-full-width">Ver Expediente Comercial</button>
                 </div>
             </div>
-            <div class="highlight-card">
-                <h3>Cliente Destacado</h3>
+
+            <div class="table-section">
+                <div class="table-filters">
+                    <div class="search-container table-search">
+                        <i data-lucide="search" class="icon-search"></i>
+                        <input type="text" placeholder="Filtrar por ID de factura o nombre de cliente...">
+                    </div>
+                    <div class="filter-actions">
+                        <select class="filter-select"><option>Octubre 2026</option></select>
+                        <select class="filter-select"><option>Todas las Categorías</option></select>
+                        <select class="filter-select"><option>Cualquier Estado</option></select>
+                        <button class="btn-icon"><i data-lucide="filter"></i></button>
+                    </div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID FACTURA</th>
+                            <th>CLIENTE / ORIGEN</th>
+                            <th>CATEGORÍA</th>
+                            <th>FECHA EMISIÓN</th>
+                            <th>FECHA COBRO</th>
+                            <th>MONTO</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold text-green">#FAC-2026-0891</td>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar">NL</div>
+                                    <div>
+                                        <strong>Nordic Global Logistics</strong>
+                                        <span>CIF: B-98321044</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Servicios Consultoría</td>
+                            <td>12 Oct 2026</td>
+                            <td>18 Oct 2026</td>
+                            <td class="font-semibold">$12,450.00</td>
+                            <td><span class="status-tag status-cobrado">● Cobrado</span></td>
+                            <td class="table-actions">
+                                <i data-lucide="eye"></i>
+                                <i data-lucide="download"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold text-green">#FAC-2026-0892</td>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-blue">AT</div>
+                                    <div>
+                                        <strong>Aura Tech Cloud</strong>
+                                        <span>Suscripción Anual Plataforma</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Suscripciones SaaS</td>
+                            <td>14 Oct 2026</td>
+                            <td>15 Oct 2026</td>
+                            <td class="font-semibold">$8,200.00</td>
+                            <td><span class="status-tag status-cobrado">● Cobrado</span></td>
+                            <td class="table-actions">
+                                <i data-lucide="eye"></i>
+                                <i data-lucide="download"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold text-green">#FAC-2026-0893</td>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-gray">BI</div>
+                                    <div>
+                                        <strong>Banco Ibérico Digital</strong>
+                                        <span>Auditoría de Cumplimiento</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Servicios Consultoría</td>
+                            <td>20 Oct 2026</td>
+                            <td class="text-red font-semibold">04 Nov 2026<br>(En 7d)</td>
+                            <td class="font-semibold text-red">$4,380.00</td>
+                            <td><span class="status-tag status-pendiente">● Pendiente</span></td>
+                            <td class="table-actions text-red">
+                                <i data-lucide="mail"></i>
+                                <i data-lucide="download"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <span class="text-muted">Mostrando <strong>6</strong> de <strong>24</strong> facturas emitidas</span>
+                    <div class="page-controls">
+                        <button class="page-btn"><i data-lucide="chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
+
 <script>
-lucide.createIcons();
+    lucide.createIcons();
 </script>
 </body>
 </html>
