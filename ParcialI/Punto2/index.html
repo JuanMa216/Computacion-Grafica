@@ -13,15 +13,15 @@
     <div class="container">
       <nav class="navbar">
             <div class="top-links">
-                <a href="#" class="icon-link" aria-label="Abrir menú">
+                <a href="#latest-stories" class="icon-link" aria-label="Ir a las secciones">
                     <img src="assets/menu.png" alt="Menú" class="nav-icon"> 
                 </a>
-                <a href="#">Sections</a>
-                <a href="#">Design</a>
-                <a href="#">Technology</a>
-                <a href="#">Culture</a>
-                <a href="#">Architecture</a>
-                <a href="#">Opinion</a>
+                <a href="#latest-stories">Sections</a>
+                <a href="#design">Design</a>
+                <a href="#technology">Technology</a>
+                <a href="#culture">Culture</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#opinion">Opinion</a>
             </div>
             <div class="top-actions">
                 <div class="search-container">
@@ -60,13 +60,13 @@
                     </div>
                 </article>
 
-                <div class="section-header">
+                <div class="section-header" id="latest-stories">
                     <h2>Latest stories</h2>
-                    <a href="#" style="font-size: 0.9rem; font-weight: bold;">See all ➔</a>
+                    <a href="#latest-stories" style="font-size: 0.9rem; font-weight: bold;">See all ➔</a>
                 </div>
 
                 <div class="latest-grid">
-                    <article class="grid-article">
+                    <article class="grid-article" id="design">
                         <img src="assets/hand.jpg" alt="Mano">
                         <span class="category-tag">Interviews</span>
                         <h3>Goodbye, screens: the post-smartphone future</h3>
@@ -108,7 +108,7 @@
                 </article>
 
                 <div class="bottom-grid">
-                    <article class="bottom-article">
+                    <article class="bottom-article" id="opinion">
                         <img src="assets/tipografydark.png" alt="Tipografía oscura">
                         <span class="category-tag">Typography</span>
                         <h3>The serif revives here</h3>
@@ -137,7 +137,7 @@
 
             <aside>
                 <div class="sidebar-top">
-                    <article class="small-article">
+                    <article class="small-article" id="technology">
                         <img src="assets/lamp.avif" alt="Lámpara">
                         <div>
                             <span class="category-tag">Technology</span>
@@ -146,7 +146,7 @@
                         </div>
                     </article>
                     
-                    <article class="small-article">
+                    <article class="small-article" id="culture">
                         <img src="assets/book.jpg" alt="Libro">
                         <div>
                             <span class="category-tag">Culture</span>
@@ -155,7 +155,7 @@
                         </div>
                     </article>
 
-                    <article class="small-article">
+                    <article class="small-article" id="architecture">
                         <img src="assets/library.jpg" alt="Biblioteca">
                         <div>
                             <span class="category-tag">Architecture</span>
@@ -209,7 +209,7 @@
                     </article>
                 </div>
 
-                <div class="newsletter-box">
+                <div class="newsletter-box" id="newsletter">
                     <h3>The Sunday Edit, in your inbox.</h3>
                     <p style="font-size: 0.9rem; color: #555;">A summary of the best stories of the week. No spam, just good content.</p>
                     <form>
@@ -251,29 +251,29 @@
                 <h2 class="footer-logo">The Meridian</h2>
                 <p class="footer-desc">Independent journalism dedicated to exploring the intersection of technology, design, culture, and architecture.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/" class="social-link" aria-label="LinkedIn">
                         <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg" alt="" aria-hidden="true">
                     </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
+                    <a href="https://twitter.com/" class="social-link" aria-label="Twitter">
                         <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twitter.svg" alt="" aria-hidden="true">
                     </a>
-                    <a href="#" class="social-link" aria-label="Instagram">
+                    <a href="https://www.instagram.com/" class="social-link" aria-label="Instagram">
                         <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/instagram.svg" alt="" aria-hidden="true">
                     </a>
                 </div>
             </div>
             <div class="footer-links">
                 <div>
-                    <h4>Sections</h4>
+                    <h4 id="footer-sections">Sections</h4>
                     <ul>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Technology</a></li>
-                        <li><a href="#">Culture</a></li>
-                        <li><a href="#">Architecture</a></li>
+                        <li><a href="#design">Design</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#culture">Culture</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4>Company</h4>
+                    <h4 id="company">Company</h4>
                     <ul>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Careers</a></li>
@@ -282,7 +282,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>Legal</h4>
+                    <h4 id="legal">Legal</h4>
                     <ul>
                         <li><a href="#">Terms of Use</a></li>
                         <li><a href="#">Privacy Policy</a></li>
