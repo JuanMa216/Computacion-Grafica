@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinControl - Inicio</title>
+    <link rel="stylesheet" href="CSS/inicio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon-logo"><i data-lucide="bar-chart-2"></i></span>
+                <h2>FinControl</h2>
+            </div>
+
+            <nav class="menu-sidebar">
+                <a href="#" class="menu-item activo"><i data-lucide="layout-grid"></i> Inicio</a>
+                <a href="#" class="menu-item"><i data-lucide="trending-up"></i> Ingresos</a>
+                <a href="#" class="menu-item"><i data-lucide="trending-down"></i> Gastos</a>
+                <a href="#" class="menu-item"><i data-lucide="bar-chart"></i> Reportes</a>
+            </nav>
+
+            <a href="#" class="btn-cerrar-sesion">
+                <i data-lucide="log-out"></i> Cerrar Sesión
+            </a>
+        </aside>
+
+        <nav class="navbar">
+            <div class="search-container">
+                <i data-lucide="search" class="icon-search"></i>
+                <input type="text" placeholder="Buscar transacciones, cuentas...">
+            </div>
+
+            <div class="navbar-right">
+                <div class="date-selector">
+                    <i data-lucide="calendar"></i>
+                    <span class="date-text">Este mes: Octubre 2026</span>
+                </div>
+
+                <button class="btn-notification">
+                    <i data-lucide="bell"></i>
+                    <span class="badge-dot"></span>
+                </button>
+
+                <div class="user-profile">
+                    <img src="assets/Profile.png" alt="Elena Rostova" class="avatar">
+                    <div class="user-info">
+                        <span class="name">Elena Rostova</span>
+                        <span class="role">• Directora Financiera</span>
+                    </div>
+                </div>
+            </div>      
+        </nav>
+
+        <main class="content">
+            
+            <header class="dashboard-header">
+                <div class="header-text">
+                    <span class="eyebrow"><span class="dot-active"></span> MÓDULO DE CONTROL PATRIMONIAL • SESIÓN ACTIVA</span>
+                    <h1>Bienvenida de nuevo, Elena</h1>
+                    <p>Jueves, 24 de Octubre de 2026 • Estado financiero actualizado hace 8 minutos</p>
+                </div>
+                <div class="header-toggle">
+                    <button class="toggle-btn active">Este mes</button>
+                    <button class="toggle-btn">Mes anterior</button>
+                    <button class="toggle-btn">Año actual</button>
+                </div>
+            </header>
+
+            <div class="summary-cards">
+                <div class="card summary-card saldo-card">
+                    <div class="card-top">
+                        <h3>SALDO TOTAL DISPONIBLE</h3>
+                        <div class="icon-box"><i data-lucide="wallet"></i></div>
+                    </div>
+                    <div class="card-amount">$124,580.00</div>
+                    <div class="card-badge">
+                        <span class="badge badge-green"><i data-lucide="trending-up" class="small-icon"></i> +8.4%</span>
+                        <span class="text-muted">vs mes anterior</span>
+                    </div>
+                    <div class="liquidez-info">
+                        <span>Liquidez Inmediata</span>
+                        <strong>94.2% del total</strong>
+                    </div>
+                </div>
+
+                <div class="card summary-card ingresos-card">
+                    <div class="card-top">
+                        <h3>INGRESOS DEL MES</h3>
+                        <div class="icon-box icon-green"><i data-lucide="arrow-down-circle"></i></div>
+                    </div>
+                    <div class="card-amount">$38,420.00</div>
+                    <div class="card-badge">
+                        <span class="badge badge-green"><i data-lucide="arrow-up" class="small-icon"></i> +12.1%</span>
+                        <span class="text-muted">Ritmo de captación</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <div class="breakdown-row">
+                            <span>Clientes recurrentes</span>
+                            <strong>$31,180.00</strong>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Rendimientos financieros</span>
+                            <strong>$7,240.00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card summary-card gastos-card">
+                    <div class="card-top">
+                        <h3>GASTOS DEL MES</h3>
+                        <div class="icon-box icon-red"><i data-lucide="banknote"></i></div>
+                    </div>
+                    <div class="card-amount">$14,850.00</div>
+                    <div class="card-badge">
+                        <span class="badge badge-red"><i data-lucide="arrow-down" class="small-icon"></i> -3.2%</span>
+                        <span class="text-muted">vs proyección base</span>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-labels">
+                            <span>Límite mensual ($24,000)</span>
+                            <span><strong>62%</strong> consumido</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar bg-dark" style="width: 62%;"></div>
+                        </div>
+                        <div class="progress-footer text-muted">
+                            $9,150.00 remanente
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-details">
+                <div class="card transactions-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Últimos Movimientos y Transacciones</h2>
+                            <p class="text-muted">Registro detallado y conciliado en tiempo real</p>
+                        </div>
+                        <div class="panel-actions">
+                            <button class="btn-secondary"><i data-lucide="sliders-horizontal"></i> Filtrar</button>
+                            <button class="btn-secondary"><i data-lucide="download"></i> Exportar</button>
+                        </div>
+                    </div>
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>FECHA</th>
+                                <th>CONCEPTO</th>
+                                <th>CATEGORÍA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>24 Oct, 14:20</td>
+                                <td><span class="dot dot-green"></span> Facturación SaaS Enterprise - Corp Nexus</td>
+                                <td><span class="tag tag-green">Clientes</span></td>
+                            </tr>
+                            <tr>
+                                <td>23 Oct, 18:45</td>
+                                <td><span class="dot dot-red"></span> Infraestructura AWS Cloud Services EU</td>
+                                <td><span class="tag tag-blue">Tecnología</span></td>
+                            </tr>
+                            <tr>
+                                <td>22 Oct, 11:15</td>
+                                <td><span class="dot dot-green"></span> Retorno Fondo de Inversión Soberano Q3</td>
+                                <td><span class="tag tag-green">Rendimientos</span></td>
+                            </tr>
+                            <tr>
+                                <td>21 Oct, 09:30</td>
+                                <td><span class="dot dot-red"></span> Campaña Performance Google Ads LatAm</td>
+                                <td><span class="tag tag-purple">Marketing</span></td>
+                            </tr>
+                            <tr>
+                                <td>20 Oct, 16:00</td>
+                                <td><span class="dot dot-red"></span> Mantenimiento y Servidores Locales</td>
+                                <td><span class="tag tag-blue">Operaciones</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card expenses-panel">
+                    <h2>Distribución de Gastos</h2>
+                    <p class="text-muted">Desglose por centro de costo mensual</p>
+                    
+                    <div class="total-box">
+                        <i data-lucide="pie-chart"></i> Total Ejecutado <strong>$14,850.00</strong>
+                    </div>
+
+                    <div class="expense-list">
+                        <div class="expense-item">
+                            <div class="expense-labels">
+                                <span>Nómina y Beneficios</span>
+                                <span>$6,240.00 <strong>42%</strong></span>
+                            </div>
+                            <div class="mini-progress-bar"><div class="fill bg-green" style="width: 42%;"></div></div>
+                        </div>
+                        <div class="expense-item">
+                            <div class="expense-labels">
+                                <span>Tecnología e Infraestructura</span>
+                                <span>$3,420.00 <strong>23%</strong></span>
+                            </div>
+                            <div class="mini-progress-bar"><div class="fill bg-dark" style="width: 23%;"></div></div>
+                        </div>
+                        <div class="expense-item">
+                            <div class="expense-labels">
+                                <span>Marketing y Crecimiento</span>
+                                <span>$2,380.00 <strong>16%</strong></span>
+                            </div>
+                            <div class="mini-progress-bar"><div class="fill bg-gray" style="width: 16%;"></div></div>
+                        </div>
+                        <div class="expense-item">
+                            <div class="expense-labels">
+                                <span>Operaciones y Logística</span>
+                                <span>$1,630.00 <strong>11%</strong></span>
+                            </div>
+                            <div class="mini-progress-bar"><div class="fill bg-light-gray" style="width: 11%;"></div></div>
+                        </div>
+                        <div class="expense-item">
+                            <div class="expense-labels">
+                                <span>Servicios Legales y Fiscales</span>
+                                <span>$1,180.00 <strong>8%</strong></span>
+                            </div>
+                            <div class="mini-progress-bar"><div class="fill bg-red" style="width: 8%;"></div></div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary w-100 mt-20"><i data-lucide="plus-circle"></i> Registrar Nuevo Movimiento</button>
+
+                    <div class="alert-box">
+                        <i data-lucide="shield-check" class="alert-icon"></i>
+                        <div>
+                            <strong>Cierre Contable Programado</strong>
+                            <p>Próximo corte automatizado:<br>31 de Octubre a las 23:59 hrs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
