@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinControl - Gastos y Egresos</title>
+    <link rel="stylesheet" href="CSS/gastos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon-logo"><i data-lucide="bar-chart-2"></i></span>
+                <h2>FinControl</h2>
+            </div>
+
+            <nav class="menu-sidebar">
+                <a href="inicio.html" class="menu-item"><i data-lucide="layout-grid"></i> Inicio</a>
+                <a href="ingresos.html" class="menu-item"><i data-lucide="trending-up"></i> Ingresos</a>
+                <a href="gastos.html" class="menu-item"><i data-lucide="trending-down"></i> Gastos</a>
+                <a href="reportes.html" class="menu-item"><i data-lucide="bar-chart"></i> Reportes</a>
+            </nav>
+
+            <a href="login.html" class="btn-cerrar-sesion">
+                <i data-lucide="log-out"></i> Cerrar Sesión
+            </a>
+        </aside>
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="search-container">
+                <i data-lucide="search" class="icon-search"></i>
+                <input type="text" placeholder="Buscar transacciones, cuentas...">
+            </div>
+
+            <div class="navbar-right">
+                <div class="date-selector">
+                    <i data-lucide="calendar"></i>
+                    <span class="date-text">Este mes: Octubre 2026</span>
+                </div>
+
+                <button class="btn-notification">
+                    <i data-lucide="bell"></i>
+                    <span class="badge-dot"></span>
+                </button>
+
+                <div class="user-profile">
+                    <img src="assets/Profile.png" alt="Elena Rostova" class="avatar">
+                    <div class="user-info">
+                        <span class="name">Elena Rostova</span>
+                        <span class="role">• Directora Financiera</span>
+                    </div>
+                </div>
+            </div>      
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            
+            <header class="content-header">
+                <div class="header-text">
+                    <span class="eyebrow"><span class="dot-active"></span> MÓDULO CONTABLE • Q4 EJERCICIO FISCAL</span>
+                    <h1>Control de Gastos <br> y Egresos</h1>
+                </div>
+                <div class="header-actions-col">
+                    <div class="actions-row">
+                        <button class="btn-outline"><i data-lucide="calendar"></i> Octubre 2026 (Mes Actual)</button>
+                        <button class="btn-outline bg-blue-light"><i data-lucide="download"></i> Exportar</button>
+                    </div>
+                    <button class="btn-primary"><i data-lucide="plus"></i> Registrar Gasto</button>
+                </div>
+            </header>
+
+            <!-- KPIs -->
+            <div class="metrics-row">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>Gastos Totales Acumulados</h3>
+                        <div class="icon-box icon-red"><i data-lucide="banknote"></i></div>
+                    </div>
+                    <p class="amount">$14,850.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-red"><i data-lucide="arrow-down-right" class="small-icon"></i> 8.4%</span>
+                        <span class="text-muted">vs. mes anterior</span>
+                    </div>
+                    <div class="progress-bar-container mt-10"><div class="progress-bar bg-red" style="width: 60%;"></div></div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>Gasto Fijo Mensual</h3>
+                        <div class="icon-box icon-blue"><i data-lucide="building-2"></i></div>
+                    </div>
+                    <p class="amount">$8,200.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-blue">55.2%</span>
+                        <span class="text-muted">del total comprometido</span>
+                    </div>
+                    <div class="progress-bar-container mt-10"><div class="progress-bar bg-blue" style="width: 55%;"></div></div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>Gastos Variables</h3>
+                        <div class="icon-box icon-purple"><i data-lucide="zap"></i></div>
+                    </div>
+                    <p class="amount">$6,650.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-red"><i data-lucide="arrow-up-right" class="small-icon"></i> 1.8%</span>
+                        <span class="text-muted">contingencias / consumo</span>
+                    </div>
+                    <div class="progress-bar-container mt-10"><div class="progress-bar bg-purple" style="width: 45%;"></div></div>
+                </div>  
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <h3>Ahorro vs Presupuesto</h3>
+                        <div class="icon-box icon-green"><i data-lucide="piggy-bank"></i></div>
+                    </div>
+                    <p class="amount text-green">+$2,150.00</p>
+                    <div class="kpi-footer">
+                        <span class="badge badge-green">Favorable</span>
+                        <span class="text-muted">Techo: $17,000.00</span>
+                    </div>
+                    <div class="progress-bar-container mt-10"><div class="progress-bar bg-green" style="width: 85%;"></div></div>
+                </div>
+            </div>  
+
+            <!-- Desglose y Distribución -->
+            <div class="middle-row">
+                
+                <!-- Desglose de Presupuesto -->
+                <div class="budget-card">
+                    <div class="card-header-flex">
+                        <div>
+                            <h2>Desglose de Presupuesto por Departamentos</h2>
+                            <p class="text-muted">Control en ejecución presupuestaria sobre límites fijados de tesorería.</p>
+                        </div>
+                        <div class="legend-tags">
+                            <span class="status-dot green-dot">Disponible</span>
+                            <span class="status-dot red-dot">Al Límite / Crítico</span>
+                        </div>
+                    </div>
+
+                    <div class="budget-list">
+                        <div class="budget-item bg-light-blue border-blue">
+                            <div class="budget-info">
+                                <span class="dept-name"><i data-lucide="cloud"></i> Infraestructura en la Nube</span>
+                                <div class="dept-stats">
+                                    <span>$4,250.00 / $5,000.00</span>
+                                    <span class="badge badge-blue">85% consumido</span>
+                                </div>
+                            </div>
+                            <div class="mini-bar"><div class="fill bg-blue" style="width: 85%;"></div></div>
+                        </div>
+
+                        <div class="budget-item bg-light-red border-red">
+                            <div class="budget-info">
+                                <span class="dept-name text-red"><i data-lucide="users"></i> Nómina y Honorarios</span>
+                                <div class="dept-stats">
+                                    <span class="text-red">$6,500.00 / $6,500.00</span>
+                                    <span class="badge badge-red">100% consumido</span>
+                                </div>
+                            </div>
+                            <div class="mini-bar"><div class="fill bg-red" style="width: 100%;"></div></div>
+                        </div>
+
+                        <div class="budget-item bg-light-green border-green">
+                            <div class="budget-info">
+                                <span class="dept-name"><i data-lucide="megaphone"></i> Marketing y Publicidad</span>
+                                <div class="dept-stats">
+                                    <span>$2,350.00 / $5,000.00</span>
+                                    <span class="badge badge-green">48% consumido</span>
+                                </div>
+                            </div>
+                            <div class="mini-bar"><div class="fill bg-green" style="width: 48%;"></div></div>
+                        </div>
+
+                        <div class="budget-item bg-light-green border-green">
+                            <div class="budget-info">
+                                <span class="dept-name"><i data-lucide="building"></i> Oficinas y Suministros</span>
+                                <div class="dept-stats">
+                                    <span>$1,650.00 / $5,000.00</span>
+                                    <span class="badge badge-green">35% consumido</span>
+                                </div>
+                            </div>
+                            <div class="mini-bar"><div class="fill bg-green" style="width: 35%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribución Real -->
+                <div class="distribution-card">
+                    <div class="card-header-flex">
+                        <h3>Distribución Real</h3>
+                        <i data-lucide="pie-chart" class="icon-muted"></i>
+                    </div>
+                    
+                    <div class="donut-chart-wrapper">
+                        <div class="donut-chart">
+                            <div class="donut-inner">
+                                <strong>100%</strong>
+                                <span>Egresos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-legend-grid">
+                        <span><span class="dot bg-red"></span> Nómina: 44%</span>
+                        <span><span class="dot bg-blue"></span> Nube: 28%</span>
+                        <span><span class="dot bg-green"></span> Marketing: 15%</span>
+                        <span><span class="dot bg-gray"></span> Suministros: 13%</span>
+                    </div>
+
+                    <div class="alert-box-small">
+                        <i data-lucide="shield-check"></i>
+                        <p>Todos los comprobantes del mes cuentan con timbrado fiscal validado ante hacienda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Transacciones -->
+            <div class="table-section">
+                <div class="table-filters">
+                    <div>
+                        <h2>Registro de Transacciones Detalladas</h2>
+                        <p class="text-muted">Histórico de comprobantes, liquidación y conciliaciones pendientes</p>
+                    </div>
+                    <div class="filter-actions">
+                        <div class="search-container table-search">
+                            <i data-lucide="search" class="icon-search"></i>
+                            <input type="text" placeholder="Filtrar proveedor...">
+                        </div>
+                        <select class="filter-select"><option>Todas las categorías</option></select>
+                        <button class="btn-icon bg-light-blue"><i data-lucide="download"></i> CSV</button>
+                        <button class="btn-icon bg-light-green"><i data-lucide="file-spreadsheet"></i> Excel</button>
+                    </div>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>PROVEEDOR / CONCEPTO</th>
+                            <th>CENTRO DE COSTOS</th>
+                            <th>CATEGORÍA</th>
+                            <th>FECHA</th>
+                            <th>MÉTODO DE PAGO</th>
+                            <th>MONTO</th>
+                            <th>COMPROBANTE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-light-green">AWS</div>
+                                    <div>
+                                        <strong>Amazon Web Services Inc.</strong>
+                                        <span class="concept-text">Hosting clúster productivo & S3 Storage</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="tag-outline">CC-102 • Tecnología</span></td>
+                            <td><span class="tag-blue"><i data-lucide="cloud"></i> Infraestructura</span></td>
+                            <td>24 Oct, 2026</td>
+                            <td class="payment-cell"><i data-lucide="credit-card"></i> Tarjeta Corp. **4021</td>
+                            <td class="font-semibold text-red">-$2,340.50</td>
+                            <td><button class="btn-file btn-file-green"><i data-lucide="file-code"></i> XML/PDF</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-light-blue">NH</div>
+                                    <div>
+                                        <strong>DevTalent Global Solutions</strong>
+                                        <span class="concept-text">Honorarios consultoría técnica Frontend</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="tag-outline">CC-101 • Dirección</span></td>
+                            <td><span class="tag-red"><i data-lucide="users"></i> Nómina y Honorarios</span></td>
+                            <td>22 Oct, 2026</td>
+                            <td class="payment-cell"><i data-lucide="landmark"></i> Transferencia SPEI</td>
+                            <td class="font-semibold text-red">-$4,500.00</td>
+                            <td><button class="btn-file btn-file-blue"><i data-lucide="file-check"></i> PDF Validado</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-light-green">GG</div>
+                                    <div>
+                                        <strong>Google Ireland Ltd</strong>
+                                        <span class="concept-text">Campaña Google Ads - Lead Generation Q4</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="tag-outline">CC-304 • Crecimiento</span></td>
+                            <td><span class="tag-green"><i data-lucide="megaphone"></i> Publicidad</span></td>
+                            <td>19 Oct, 2026</td>
+                            <td class="payment-cell"><i data-lucide="credit-card"></i> Tarjeta Corp. **4021</td>
+                            <td class="font-semibold text-red">-$1,250.00</td>
+                            <td><button class="btn-file btn-file-blue"><i data-lucide="file-text"></i> Factura</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-client">
+                                    <div class="client-avatar bg-light-blue">WW</div>
+                                    <div>
+                                        <strong>WeWork Operations LatAm</strong>
+                                        <span class="concept-text">Renta de espacios corporativos y salas de juntas</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="tag-outline">CC-201 • Operaciones</span></td>
+                            <td><span class="tag-blue"><i data-lucide="building"></i> Oficinas</span></td>
+                            <td>15 Oct, 2026</td>
+                            <td class="payment-cell"><i data-lucide="landmark"></i> Transferencia SPEI</td>
+                            <td class="font-semibold text-red">-$1,600.00</td>
+                            <td><button class="btn-file btn-file-blue"><i data-lucide="file-text"></i> PDF Fiscal</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <span class="text-muted">Mostrando 4 de 8 transacciones registradas en este periodo</span>
+                    <div class="page-controls">
+                        <button class="page-btn">Anterior</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
