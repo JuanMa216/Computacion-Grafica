@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<!--metadatos-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +11,9 @@
 <body>
 
     <div class="container">
-    <!--navbar-->
       <nav class="navbar">
             <div class="top-links">
-                <a href="#" class="icon-link">
+                <a href="#" class="icon-link" aria-label="Abrir menú">
                     <img src="assets/menu.png" alt="Menú" class="nav-icon"> 
                 </a>
                 <a href="#">Sections</a>
@@ -28,17 +26,17 @@
             <div class="top-actions">
                 <div class="search-container">
                     <img src="assets/search.png" alt="Buscar" class="search-icon">
-                    <input type="text" class="search-bar" placeholder="Search Meridian...">
+                    <label for="site-search" class="visually-hidden">Buscar en The Meridian</label>
+                    <input type="search" id="site-search" name="q" class="search-bar" placeholder="Search Meridian...">
                 </div>
                 <a href="#" style="margin-right: 15px;">Sign In</a>
                 <button class="subscribe-btn">Subscribe</button>
             </div>
         </nav>
 
-        <!-- header -->
         <header>
             <div class="date-info">
-                <span>Tuesday, October 15, 2026</span>
+                <time datetime="2026-10-15">Tuesday, October 15, 2026</time>
                 <span style="color: var(--secondary-color); font-weight: bold;">● Edition: US / Intl</span>
                 <span>Today's Paper | Editions</span>
             </div>
@@ -46,10 +44,8 @@
             <div class="tagline">Technology, Architecture, Design, Culture — Independent reporting.</div>
         </header>
 
-        <!-- main content -->
         <div class="main-layout">
             
-            <!-- content-->
             <main>
                 <article class="cover-story">
                     <img src="assets/desingstudio.avif" alt="Estudio de diseño">
@@ -59,7 +55,7 @@
                         <p>From smartphones to laptops, a quiet movement is shifting aesthetics from austere glass and metal to something softer. Connect with tech that is designed to be felt as much as seeing it.</p>
                         <div class="author-info">
                             <img src="assets/julian.jpg" alt="Julian Anders" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-                            <div class="author-date">By Julian Anders • October 15, 2026</div>
+                            <div class="author-date">By Julian Anders • <time datetime="2026-10-15">October 15, 2026</time></div>
                         </div>
                     </div>
                 </article>
@@ -139,7 +135,6 @@
 
             </main>
 
-            <!--sidebar-->
             <aside>
                 <div class="sidebar-top">
                     <article class="small-article">
@@ -147,7 +142,7 @@
                         <div>
                             <span class="category-tag">Technology</span>
                             <h3>The podcast mic that doubles as a reading lamp — on purpose</h3>
-                            <div class="author-date">2 hrs ago</div>
+                            <time class="author-date" datetime="PT2H">2 hrs ago</time>
                         </div>
                     </article>
                     
@@ -156,7 +151,7 @@
                         <div>
                             <span class="category-tag">Culture</span>
                             <h3>Notes on tech: analog lives intermixed with digital tools</h3>
-                            <div class="author-date">4 hrs ago</div>
+                            <time class="author-date" datetime="PT4H">4 hrs ago</time>
                         </div>
                     </article>
 
@@ -165,12 +160,11 @@
                         <div>
                             <span class="category-tag">Architecture</span>
                             <h3>What a modern public library looks like</h3>
-                            <div class="author-date">5 hrs ago</div>
+                            <time class="author-date" datetime="PT5H">5 hrs ago</time>
                         </div>
                     </article>
                 </div>
 
-                <!-- the meridian ad -->
                 <div class="promo-banner">
                     <div>
                         <strong>Review the Meridian Daily</strong>
@@ -179,7 +173,6 @@
                     <span style="font-size: 1.5rem;">➔</span>
                 </div>
 
-                <!-- most read items -->
                 <div class="section-header" style="margin-top: 30px;">
                     <h2 style="font-size: 1.2rem;">Most read</h2>
                 </div>
@@ -216,18 +209,17 @@
                     </article>
                 </div>
 
-                <!-- newsletter -->
                 <div class="newsletter-box">
                     <h3>The Sunday Edit, in your inbox.</h3>
                     <p style="font-size: 0.9rem; color: #555;">A summary of the best stories of the week. No spam, just good content.</p>
                     <form>
-                        <input type="email" placeholder="Email address" required>
+                        <label for="newsletter-email" class="visually-hidden">Correo electrónico</label>
+                        <input type="email" id="newsletter-email" name="email" placeholder="Email address" autocomplete="email" required>
                         <button type="submit">Subscribe</button>
                     </form>
                     <div style="font-size: 0.75rem; color: #888; margin-top: 10px;">By subscribing, you agree to our Terms of Use.</div>
                 </div>
 
-                <!-- topics -->
                 <div class="section-header">
                     <h2 style="font-size: 1.2rem;">Topics</h2>
                 </div>
@@ -242,7 +234,6 @@
                     <span class="topic-tag">Travel</span>
                 </div>
 
-                <!-- Editor's Pick -->
                 <div class="editor-pick">
                     <span class="category-tag">Editor's Pick</span>
                     <img src="assets/notebook.jpg" alt="Libreta negra con bolígrafo">
@@ -254,7 +245,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <div>
