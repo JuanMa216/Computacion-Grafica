@@ -5,12 +5,14 @@ export const gameState = {
   maxLives: 3,
   currentLevel: 1,
   hasKey: false,
+  collectedBook: null, // null | "red" | "green" | "blue"
 
   reset() {
     this.score = 0;
     this.lives = this.maxLives;
     this.currentLevel = 1;
     this.hasKey = false;
+    this.collectedBook = null;
   },
 
   loseLife() {

@@ -104,8 +104,22 @@ export function createHUD(k, levelTitle = "NIVEL 1") {
     const formattedScore = String(gameState.score).padStart(5, "0");
     scoreLabel.text = formattedScore;
 
-    // Update key visibility
-    keyIcon.opacity = gameState.hasKey ? 1 : 0;
+    // Update key / book inventory display
+    if (gameState.collectedBook === "red") {
+      keyIcon.use(k.sprite("book_red"));
+      keyIcon.opacity = 1;
+    } else if (gameState.collectedBook === "green") {
+      keyIcon.use(k.sprite("book_green"));
+      keyIcon.opacity = 1;
+    } else if (gameState.collectedBook === "blue") {
+      keyIcon.use(k.sprite("book_blue"));
+      keyIcon.opacity = 1;
+    } else if (gameState.hasKey) {
+      keyIcon.use(k.sprite("key"));
+      keyIcon.opacity = 1;
+    } else {
+      keyIcon.opacity = 0;
+    }
   });
 
   return {

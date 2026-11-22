@@ -1,6 +1,9 @@
 import k from "./kaboomCtx.js";
 import { gameState } from "./state.js";
 import { initLevel1 } from "./scenes/level1.js";
+import { initLevel2 } from "./scenes/level2.js";
+import { initDungeonRed } from "./scenes/dungeon_red.js";
+import { initDungeonGreen } from "./scenes/dungeon_green.js";
 import { initGameOver } from "./scenes/gameover.js";
 
 // --- 1. Load Character Sprites ---
@@ -80,6 +83,9 @@ k.loadSprite("dungeon_spikes", "/sprites/hazards/dungeon_spikes.png");
 k.loadSprite("coin", "/sprites/items/coin.png");
 k.loadSprite("gem", "/sprites/items/gem.png");
 k.loadSprite("key", "/sprites/items/key.png");
+k.loadSprite("book_red", "/sprites/items/book_red.png");
+k.loadSprite("book_green", "/sprites/items/book_green.png");
+k.loadSprite("book_blue", "/sprites/items/book_blue.png");
 k.loadSprite("door_closed", "/sprites/tiles/door_closed.png");
 k.loadSprite("door_open", "/sprites/tiles/door_open.png");
 k.loadSprite("spring", "/sprites/tiles/spring.png");
@@ -105,9 +111,14 @@ k.loadFont("vt323", "/fonts/VT323.ttf");
 
 // --- 6. Scene Management ---
 initLevel1(k);
+initLevel2(k);
+initDungeonRed(k);
+initDungeonGreen(k);
 initGameOver(k);
 
-// Start directly at Level 1
-k.go("level1");
+// Start at Level 1, or Level 2 via URL query param (?level=2)
+const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+const initialScene = urlParams?.get("level") === "2" ? "level2" : "level1";
+k.go(initialScene);
 
 export default k;
