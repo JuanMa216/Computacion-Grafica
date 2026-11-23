@@ -2,9 +2,12 @@ import k from "./kaboomCtx.js";
 import { gameState } from "./state.js";
 import { initLevel1 } from "./scenes/level1.js";
 import { initLevel2 } from "./scenes/level2.js";
+import { initLevel3 } from "./scenes/level3.js";
 import { initDungeonRed } from "./scenes/dungeon_red.js";
 import { initDungeonGreen } from "./scenes/dungeon_green.js";
+import { initVictory } from "./scenes/victory.js";
 import { initGameOver } from "./scenes/gameover.js";
+import { initSecret } from "./scenes/secret.js";
 
 // --- 1. Load Character Sprites ---
 k.loadSprite("player", "/sprites/player/mili.png", {
@@ -77,6 +80,7 @@ k.loadSprite("cave_spikes", "/sprites/hazards/cave_spikes.png");
 k.loadSprite("dungeon_top", "/sprites/tiles/dungeon_top.png");
 k.loadSprite("dungeon_wall", "/sprites/tiles/dungeon_wall.png");
 k.loadSprite("dungeon_platform", "/sprites/tiles/dungeon_platform.png");
+k.loadSprite("dungeon_platform_2x", "/sprites/tiles/dungeon_platform_2x.png");
 k.loadSprite("dungeon_spikes", "/sprites/hazards/dungeon_spikes.png");
 
 // Collectibles, Items & Props
@@ -97,6 +101,7 @@ k.loadSprite("heart_empty", "/sprites/items/heart_empty.png");
 k.loadSprite("bg_level1", "/sprites/backgrounds/bg_level1.png");
 k.loadSprite("bg_level2", "/sprites/backgrounds/bg_level2.png");
 k.loadSprite("bg_level3", "/sprites/backgrounds/bg_level3.png");
+k.loadSprite("bg_secret", "/sprites/backgrounds/easter_egg.jpg");
 
 // --- 4. Retro Audio ---
 k.loadSound("jump", "/sounds/jump.wav");
@@ -112,13 +117,25 @@ k.loadFont("vt323", "/fonts/VT323.ttf");
 // --- 6. Scene Management ---
 initLevel1(k);
 initLevel2(k);
+initLevel3(k);
 initDungeonRed(k);
 initDungeonGreen(k);
+initVictory(k);
 initGameOver(k);
+initSecret(k);
 
-// Start at Level 1, or Level 2 via URL query param (?level=2)
+// Start at Level 1, or Level 2 / Level 3 / Secret via URL query param (?level=2, ?level=3, ?level=secret)
 const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
-const initialScene = urlParams?.get("level") === "2" ? "level2" : "level1";
+const levelParam = urlParams?.get("level");
+let initialScene = "level1";
+if (levelParam === "2") initialScene = "level2";
+else if (levelParam === "3") initialScene = "level3";
+else if (levelParam === "victory") initialScene = "victory";
+else if (levelParam === "secret" || levelParam === "easteregg") {
+  gameState.score = 5500;
+  initialScene = "secret";
+}
+
 k.go(initialScene);
 
 export default k;

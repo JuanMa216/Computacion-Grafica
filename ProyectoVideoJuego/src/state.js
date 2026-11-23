@@ -6,6 +6,8 @@ export const gameState = {
   currentLevel: 1,
   hasKey: false,
   collectedBook: null, // null | "red" | "green" | "blue"
+  secretScoreThreshold: 7000, 
+  foundEasterEgg: false,
 
   reset() {
     this.score = 0;
@@ -13,6 +15,7 @@ export const gameState = {
     this.currentLevel = 1;
     this.hasKey = false;
     this.collectedBook = null;
+    this.foundEasterEgg = false;
   },
 
   loseLife() {

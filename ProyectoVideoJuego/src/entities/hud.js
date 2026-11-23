@@ -55,8 +55,9 @@ export function createHUD(k, levelTitle = "NIVEL 1") {
   ]);
 
   // --- 3. Current Level Label ---
+  const displayTitle = typeof levelTitle === "string" ? levelTitle : "NIVEL 1";
   const levelLabel = k.add([
-    k.text(levelTitle.toUpperCase(), {
+    k.text(displayTitle.toUpperCase(), {
       font: "pressstart",
       size: 10
     }),

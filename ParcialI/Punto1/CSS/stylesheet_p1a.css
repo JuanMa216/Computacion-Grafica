@@ -144,7 +144,7 @@
 .rectangle1 {
     width: 100%;
     height: 150px;
-    background-color: #ed8f31;
+    background-color: #000000;
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -152,7 +152,7 @@
 .rectangle2 {
     width: 100%;
     height: 50px;
-    background-color: #ed8f31;
+    background-color: #000000;
     border-radius: 5px;
 }
 

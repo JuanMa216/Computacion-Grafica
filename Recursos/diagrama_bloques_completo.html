@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Diagrama de Bloques Electrónico Completo - Multiplicador Secuencial</title>
+  <style>
+    .bus-line { stroke: #38bdf8; stroke-width: 2.5; fill: none; }
+    .bit-line { stroke: #f59e0b; stroke-width: 2; fill: none; }
+    .carry-line { stroke: #ec4899; stroke-width: 2; fill: none; }
+    .ctrl-line { stroke: #34d399; stroke-width: 1.8; stroke-dasharray: 5,4; fill: none; }
+    .clk-line { stroke: #94a3b8; stroke-width: 1.5; stroke-dasharray: 3,3; fill: none; }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 sm:p-6">
+  <div class="max-w-6xl mx-auto space-y-5">
+
+    <!-- Header bar -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-md flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-xl font-bold flex items-center gap-2">
+          <span class="w-3.5 h-3.5 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/50"></span>
+          Diagrama de Bloques Electrónico Completo: Multiplicador Secuencial
+        </h1>
+        <p class="text-xs sm:text-sm text-[var(--muted-foreground)] mt-0.5">
+          Arquitectura Canónica 4 bits × 4 bits = 8 bits con Registros, Sumador, Lógica "IF" (4 ANDs), Flip-Flop D y FSM
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="downloadSVG()" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] shadow hover:opacity-90 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Descargar SVG
+        </button>
+      </div>
+    </div>
+
+    <!-- Canvas / SVG Diagram Container -->
+    <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-x-auto">
+      <svg id="multiplierSvg" viewBox="0 0 1100 820" width="100%" height="auto" class="min-w-[950px] font-sans select-none">
+        <defs>
+          <!-- Arrow Markers -->
+          <marker id="arrow-bus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8"/>
+          </marker>
+          <marker id="arrow-bit" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 9 5 L 0 9 z" fill="#f59e0b"/>
+          </marker>
+          <marker id="arrow-carry" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 9 5 L 0 9 z" fill="#ec4899"/>
+          </marker>
+          <marker id="arrow-ctrl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 9 5 L 0 9 z" fill="#34d399"/>
+          </marker>
+          <marker id="arrow-clk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 9 5 L 0 9 z" fill="#94a3b8"/>
+          </marker>
+
+          <!-- Gradients -->
+          <linearGradient id="grad-reg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4338ca"/>
+            <stop offset="100%" stop-color="#312e81"/>
+          </linearGradient>
+          <linearGradient id="grad-comb" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+          <linearGradient id="grad-fsm" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#065f46"/>
+            <stop offset="100%" stop-color="#022c22"/>
+          </linearGradient>
+          <linearGradient id="grad-ff" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#9d174d"/>
+            <stop offset="100%" stop-color="#700735"/>
+          </linearGradient>
+          <linearGradient id="grad-and" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#78350f"/>
+            <stop offset="100%" stop-color="#451a03"/>
+          </linearGradient>
+
+          <!-- Filter Shadow -->
+          <filter id="box-shadow" x="-5%" y="-5%" width="115%" height="115%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+          </filter>
+        </defs>
+
+        <!-- Grid Pattern (subtle) -->
+        <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <circle cx="15" cy="15" r="0.8" fill="#1e293b"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- ============================================================== -->
+        <!-- ENTRADAS EXTERNAS PRINCIPALES (Izquierda y Arriba)            -->
+        <!-- ============================================================== -->
+
+        <!-- Entrada Multiplicando A -->
+        <g id="input-A">
+          <rect x="30" y="70" width="100" height="42" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" filter="url(#box-shadow)"/>
+          <text x="80" y="92" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">A_in [3:0]</text>
+          <text x="80" y="104" text-anchor="middle" fill="#94a3b8" font-size="9">Multiplicando</text>
+          <!-- Bus arrow hacia Reg A -->
+          <path d="M 130 91 L 180 91" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="155" y="85" fill="#38bdf8" font-size="10" font-weight="bold">/4</text>
+        </g>
+
+        <!-- Entrada Multiplicador B -->
+        <g id="input-B">
+          <rect x="30" y="580" width="100" height="42" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" filter="url(#box-shadow)"/>
+          <text x="80" y="602" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">B_in [3:0]</text>
+          <text x="80" y="614" text-anchor="middle" fill="#94a3b8" font-size="9">Multiplicador</text>
+          <!-- Bus arrow hacia Reg Q -->
+          <path d="M 130 601 L 710 601" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="400" y="594" fill="#38bdf8" font-size="10" font-weight="bold">/4 (Carga paralela en Ciclo 0)</text>
+        </g>
+
+        <!-- Entradas de Control Global: CLK, RST, START -->
+        <g id="inputs-control">
+          <rect x="520" y="25" width="220" height="34" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text x="540" y="46" fill="#f8fafc" font-size="11" font-weight="bold">START</text>
+          <text x="615" y="46" fill="#f8fafc" font-size="11" font-weight="bold">CLK</text>
+          <text x="680" y="46" fill="#f8fafc" font-size="11" font-weight="bold">RST</text>
+          <path d="M 630 59 L 630 85" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-ctrl)"/>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 1. BLOQUE DE CONTROL (FSM / CONTADOR MOD 4)                   -->
+        <!-- ============================================================== -->
+        <g id="fsm-block">
+          <rect x="520" y="85" width="220" height="95" rx="12" fill="url(#grad-fsm)" stroke="#10b981" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="630" y="112" text-anchor="middle" fill="#6ee7b7" font-size="14" font-weight="bold">UNIDAD DE CONTROL (FSM)</text>
+          <text x="630" y="130" text-anchor="middle" fill="#a7f3d0" font-size="11">Contador Módulo 4 (2 bits: 0 a 3)</text>
+          <text x="630" y="148" text-anchor="middle" fill="#6ee7b7" font-size="10">Chip: 74LS163 / FSM Secuencial</text>
+          <text x="630" y="166" text-anchor="middle" fill="#34d399" font-size="10">Genera: Load_A, Load_B, Shift, Clr, Done</text>
+
+          <!-- Salida DONE hacia la derecha -->
+          <path d="M 740 132 L 870 132" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrow-ctrl)"/>
+          <rect x="870" y="112" width="90" height="40" rx="8" fill="#064e3b" stroke="#34d399" stroke-width="1.5"/>
+          <text x="915" y="136" text-anchor="middle" fill="#a7f3d0" font-size="12" font-weight="bold">DONE</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 2. REGISTRO A (PIPO 4 bits)                                   -->
+        <!-- ============================================================== -->
+        <g id="reg-A">
+          <rect x="180" y="60" width="220" height="75" rx="12" fill="url(#grad-reg)" stroke="#818cf8" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="290" y="86" text-anchor="middle" fill="#e0e7ff" font-size="14" font-weight="bold">REGISTRO A (Multiplicando)</text>
+          <text x="290" y="104" text-anchor="middle" fill="#c7d2fe" font-size="11">Tipo PIPO (4 bits) • IC: 74LS173</text>
+          <text x="290" y="122" text-anchor="middle" fill="#a5b4fc" font-size="10">Retiene A fijo durante la multiplicación</text>
+
+          <!-- Control FSM hacia Reg A -->
+          <path d="M 520 120 L 400 120" class="ctrl-line" marker-end="url(#arrow-ctrl)"/>
+          <text x="450" y="114" fill="#6ee7b7" font-size="9">Load_A</text>
+
+          <!-- Bus A hacia abajo hacia el IF (ANDs) -->
+          <path d="M 290 135 L 290 200" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="300" y="165" fill="#38bdf8" font-size="10" font-weight="bold">A [3:0] (/4)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 3. CIRCUITO "IF" (4 COMPUERTAS AND)                           -->
+        <!-- ============================================================== -->
+        <g id="if-block">
+          <rect x="160" y="200" width="260" height="120" rx="14" fill="url(#grad-and)" stroke="#f59e0b" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="290" y="224" text-anchor="middle" fill="#fde68a" font-size="13" font-weight="bold">CIRCUITO "IF" (Habilitador con Q[0])</text>
+          <text x="290" y="240" text-anchor="middle" fill="#fbbf24" font-size="10">4 Compuertas AND en Paralelo • IC: 74LS08</text>
+
+          <!-- Dibujo simbólico de las 4 compuertas AND -->
+          <g transform="translate(190, 250)">
+            <!-- AND 3 -->
+            <rect x="0" y="0" width="38" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="19" y="16" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">&</text>
+            <text x="19" y="36" text-anchor="middle" fill="#fbbf24" font-size="8">bit 3</text>
+
+            <!-- AND 2 -->
+            <rect x="52" y="0" width="38" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="71" y="16" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">&</text>
+            <text x="71" y="36" text-anchor="middle" fill="#fbbf24" font-size="8">bit 2</text>
+
+            <!-- AND 1 -->
+            <rect x="104" y="0" width="38" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="123" y="16" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">&</text>
+            <text x="123" y="36" text-anchor="middle" fill="#fbbf24" font-size="8">bit 1</text>
+
+            <!-- AND 0 -->
+            <rect x="156" y="0" width="38" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="175" y="16" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">&</text>
+            <text x="175" y="36" text-anchor="middle" fill="#fbbf24" font-size="8">bit 0</text>
+          </g>
+
+          <text x="290" y="308" text-anchor="middle" fill="#fef3c7" font-size="9.5" font-style="italic">
+            Si Q[0] == 1 → Pasa A [3:0] | Si Q[0] == 0 → Pasa 0000
+          </text>
+
+          <!-- Bus de salida del IF hacia el Sumador -->
+          <path d="M 290 320 L 290 370" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="300" y="348" fill="#38bdf8" font-size="10" font-weight="bold">A_gated [3:0] (/4)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 4. SUMADOR DE 4 BITS                                          -->
+        <!-- ============================================================== -->
+        <g id="adder-block">
+          <rect x="160" y="370" width="330" height="95" rx="14" fill="url(#grad-comb)" stroke="#60a5fa" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="325" y="396" text-anchor="middle" fill="#bfdbfe" font-size="14" font-weight="bold">SUMADOR PARALELO DE 4 BITS (Σ)</text>
+          <text x="325" y="413" text-anchor="middle" fill="#93c5fd" font-size="10.5">Circuito Combinacional • IC: 74LS283</text>
+          <text x="325" y="430" text-anchor="middle" fill="#e2e8f0" font-size="11" font-family="monospace">Operación: Sum = ACC[3:0] + A_gated[3:0]</text>
+          <text x="325" y="448" text-anchor="middle" fill="#94a3b8" font-size="9.5">Cin = 0 (GND) • Genera Sum[3:0] (4 bits) y Cout (1 bit)</text>
+
+          <!-- Salida Cout (1 bit hacia el Flip-Flop Carry) -->
+          <path d="M 210 465 L 210 520 L 210 550" class="carry-line" marker-end="url(#arrow-carry)"/>
+          <text x="216" y="500" fill="#ec4899" font-size="10" font-weight="bold">Cout (1b)</text>
+
+          <!-- Salida Sum[3:0] (4 bits hacia el Acumulador) -->
+          <path d="M 400 465 L 400 520 L 460 520 L 460 550" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="466" y="500" fill="#38bdf8" font-size="10" font-weight="bold">Sum [3:0] (/4)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 5. FLIP-FLOP CARRY (1 bit)                                    -->
+        <!-- ============================================================== -->
+        <g id="ff-carry">
+          <rect x="150" y="550" width="120" height="95" rx="12" fill="url(#grad-ff)" stroke="#ec4899" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="210" y="576" text-anchor="middle" fill="#fbcfe8" font-size="13" font-weight="bold">FLIP-FLOP C</text>
+          <text x="210" y="594" text-anchor="middle" fill="#f472b6" font-size="10.5">Carry (1 bit)</text>
+          <text x="210" y="612" text-anchor="middle" fill="#fbcfe8" font-size="9">Tipo D • IC: 74LS74</text>
+          <text x="210" y="630" text-anchor="middle" fill="#f9a8d4" font-size="9">Entrada D: Cout</text>
+
+          <!-- Línea de desplazamiento de C hacia Acc -->
+          <path d="M 270 595 L 360 595" class="carry-line" marker-end="url(#arrow-carry)"/>
+          <text x="300" y="588" fill="#ec4899" font-size="9.5" font-weight="bold">C (>> 1)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 6. REGISTRO ACUMULADOR (4 bits)                               -->
+        <!-- ============================================================== -->
+        <g id="reg-acc">
+          <rect x="360" y="550" width="260" height="95" rx="14" fill="url(#grad-reg)" stroke="#a855f7" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="490" y="576" text-anchor="middle" fill="#f3e8ff" font-size="14" font-weight="bold">ACUMULADOR (ACC)</text>
+          <text x="490" y="594" text-anchor="middle" fill="#d8b4fe" font-size="11">Registro de Desplazamiento (4 bits)</text>
+          <text x="490" y="612" text-anchor="middle" fill="#e9d5ff" font-size="9.5">Universal / Shift-Right • IC: 74LS194</text>
+          <text x="490" y="630" text-anchor="middle" fill="#c084fc" font-size="9.5">Inicial: 0000 | Final: P[7:4] (MSBs)</text>
+
+          <!-- Línea de realimentación desde ACC hacia el Sumador -->
+          <path d="M 490 550 L 490 500 L 450 500 L 450 465" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="500" y="525" fill="#38bdf8" font-size="9.5" font-weight="bold">ACC [3:0] (/4)</text>
+
+          <!-- Línea de desplazamiento de ACC[0] hacia Reg Q -->
+          <path d="M 620 595 L 710 595" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="645" y="588" fill="#38bdf8" font-size="9.5" font-weight="bold">ACC[0] (1b)</text>
+
+          <!-- Bus de salida de Producto Alto P[7:4] -->
+          <path d="M 490 645 L 490 720" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="500" y="685" fill="#c084fc" font-size="10" font-weight="bold">P[7:4] (/4)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- 7. REGISTRO Q (4 bits)                                        -->
+        <!-- ============================================================== -->
+        <g id="reg-Q">
+          <rect x="710" y="550" width="260" height="95" rx="14" fill="url(#grad-reg)" stroke="#f59e0b" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="840" y="576" text-anchor="middle" fill="#fef3c7" font-size="14" font-weight="bold">REGISTRO Q (Multiplicador)</text>
+          <text x="840" y="594" text-anchor="middle" fill="#fde68a" font-size="11">Registro Universal (4 bits)</text>
+          <text x="840" y="612" text-anchor="middle" fill="#fef3c7" font-size="9.5">Universal PIPO / PISO / SIPO • IC: 74LS194</text>
+          <text x="840" y="630" text-anchor="middle" fill="#f59e0b" font-size="9.5">Inicial: B[3:0] | Final: P[3:0] (LSBs)</text>
+
+          <!-- Línea de realimentación del bit Q[0] hacia el IF (Arriba) -->
+          <path d="M 970 595 L 1020 595 L 1020 260 L 420 260" class="bit-line" marker-end="url(#arrow-bit)"/>
+          <text x="1030" y="430" fill="#f59e0b" font-size="11" font-weight="bold" transform="rotate(90 1030 430)">Q[0] (Línea de decisión del IF - 1 bit)</text>
+
+          <!-- Bus de salida de Producto Bajo P[3:0] -->
+          <path d="M 840 645 L 840 720" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="850" y="685" fill="#f59e0b" font-size="10" font-weight="bold">P[3:0] (/4)</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- SEÑALES DE CONTROL FSM (LÍNEAS PUNTEADAS VERDES)               -->
+        <!-- ============================================================== -->
+        <!-- Línea FSM hacia Flip-Flop Carry -->
+        <path d="M 540 180 L 540 220 L 140 220 L 140 595 L 150 595" class="ctrl-line" marker-end="url(#arrow-ctrl)"/>
+        <!-- Línea FSM hacia Acumulador -->
+        <path d="M 600 180 L 600 550" class="ctrl-line" marker-end="url(#arrow-ctrl)"/>
+        <!-- Línea FSM hacia Registro Q -->
+        <path d="M 700 180 L 700 550" class="ctrl-line" marker-end="url(#arrow-ctrl)"/>
+
+        <!-- Etiqueta de la cadena de desplazamiento conjunto -->
+        <rect x="260" y="660" width="560" height="26" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+        <text x="540" y="677" text-anchor="middle" fill="#e2e8f0" font-size="10.5" font-family="monospace">
+          ➔➔ Cadena de Desplazamiento Conjunto a la Derecha (>> 1): [ C | ACC[3:0] | Q[3:0] ] ➔➔
+        </text>
+
+        <!-- ============================================================== -->
+        <!-- SALIDA FINAL DEL PRODUCTO [7:0] (Abajo)                       -->
+        <!-- ============================================================== -->
+        <g id="output-product">
+          <!-- Empalme de buses P[7:4] y P[3:0] -->
+          <path d="M 490 720 L 665 720" class="bus-line"/>
+          <path d="M 840 720 L 665 720" class="bus-line"/>
+          <path d="M 665 720 L 665 750" class="bus-line" marker-end="url(#arrow-bus)"/>
+          <text x="675" y="738" fill="#38bdf8" font-size="11" font-weight="bold">/8</text>
+
+          <rect x="540" y="750" width="250" height="48" rx="10" fill="#1e1b4b" stroke="#818cf8" stroke-width="2" filter="url(#box-shadow)"/>
+          <text x="665" y="772" text-anchor="middle" fill="#c7d2fe" font-size="13" font-weight="bold">PRODUCTO FINAL [7:0]</text>
+          <text x="665" y="788" text-anchor="middle" fill="#a5b4fc" font-size="10">Concatenación: { ACC[3:0], Q[3:0] }</text>
+        </g>
+
+        <!-- ============================================================== -->
+        <!-- LEYENDA (Pie de diagrama)                                      -->
+        <!-- ============================================================== -->
+        <g id="legend" transform="translate(60, 770)">
+          <!-- Item Registros -->
+          <rect x="0" y="0" width="16" height="16" rx="4" fill="#4338ca"/>
+          <text x="24" y="12" fill="#cbd5e1" font-size="10">Registros (PIPO/Shift)</text>
+
+          <!-- Item Lógica Combinacional -->
+          <rect x="160" y="0" width="16" height="16" rx="4" fill="#1e293b" stroke="#60a5fa"/>
+          <text x="184" y="12" fill="#cbd5e1" font-size="10">Sumador Combinacional</text>
+
+          <!-- Item IF ANDs -->
+          <rect x="330" y="0" width="16" height="16" rx="4" fill="#78350f" stroke="#f59e0b"/>
+          <text x="354" y="12" fill="#cbd5e1" font-size="10">Lógica IF (4 ANDs)</text>
+
+          <!-- Item FSM -->
+          <rect x="480" y="0" width="16" height="16" rx="4" fill="#065f46" stroke="#10b981"/>
+          <text x="504" y="12" fill="#cbd5e1" font-size="10">Control FSM</text>
+
+          <!-- Item Flip-Flop -->
+          <rect x="600" y="0" width="16" height="16" rx="4" fill="#9d174d" stroke="#ec4899"/>
+          <text x="624" y="12" fill="#cbd5e1" font-size="10">Flip-Flop Carry</text>
+
+          <!-- Item Líneas Control -->
+          <line x1="730" y1="8" x2="755" y2="8" stroke="#34d399" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="765" y="12" fill="#cbd5e1" font-size="10">Señales de Control</text>
+
+          <!-- Item Bus de Datos -->
+          <line x1="880" y1="8" x2="905" y2="8" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="915" y="12" fill="#cbd5e1" font-size="10">Buses de Datos</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Panel de Detalles y Especificación Pin a Pin -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+      <div class="bg-[var(--card)] p-4 rounded-xl border border-[var(--border)] space-y-2">
+        <h3 class="font-bold text-amber-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          El bloque IF (4 ANDs - 74LS08)
+        </h3>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">
+          Recibe en paralelo los 4 bits del multiplicando <code class="text-blue-400">A[3:0]</code> y en la otra entrada común el bit serial <code class="text-amber-400">Q[0]</code>.
+        </p>
+        <div class="p-2 bg-[var(--background)] rounded font-mono text-[11px] text-[var(--foreground)]">
+          Out[i] = A[i] &amp; Q[0]
+        </div>
+        <p class="text-[var(--muted-foreground)]">
+          Si $Q[0]=1 \implies Out = A$. Si $Q[0]=0 \implies Out = 0000$.
+        </p>
+      </div>
+
+      <div class="bg-[var(--card)] p-4 rounded-xl border border-[var(--border)] space-y-2">
+        <h3 class="font-bold text-pink-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+          El Flip-Flop Carry (74LS74)
+        </h3>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">
+          Su entrada <b>D</b> se conecta a <code class="text-pink-400">Cout</code> del sumador. En el flanco de reloj guarda el acarreo de la suma parcial.
+        </p>
+        <p class="text-[var(--muted-foreground)]">
+          En el paso de desplazamiento, su salida <b>Q</b> entra a <code class="text-purple-400">ACC[3]</code> (bit MSB del acumulador) y luego se limpia a 0.
+        </p>
+      </div>
+
+      <div class="bg-[var(--card)] p-4 rounded-xl border border-[var(--border)] space-y-2">
+        <h3 class="font-bold text-purple-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+          El Registro Dual [ACC | Q] (74LS194)
+        </h3>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">
+          Son dos registros universales de 4 bits conectados en cascada para formar un registro de desplazamiento conjunto de 8 bits.
+        </p>
+        <p class="text-[var(--muted-foreground)]">
+          A la derecha, <code class="text-amber-400">Q[0]</code> decide la suma. A la izquierda, <code class="text-purple-400">ACC[0]</code> entra a <code class="text-amber-400">Q[3]</code>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function downloadSVG() {
+      const svg = document.getElementById("multiplierSvg");
+      const serializer = new XMLSerializer();
+      const source = serializer.serializeToString(svg);
+      const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "diagrama_bloques_multiplicador_secuencial.svg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

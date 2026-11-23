@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Material de refuerzo interactivo sobre introducción a HTML5">
+  <title>Refuerzo interactivo · Introducción a HTML5</title>
+  <style>
+    :root {
+      --navy:#0b315a; --blue:#1769aa; --cyan:#20a6d8; --sky:#eaf6fc;
+      --pale:#f5fafd; --ink:#172b3a; --muted:#5c7281; --line:#c9e3f0;
+      --green:#147d64; --green-pale:#eaf7f3; --amber:#b36b00; --red:#b33b46;
+      --shadow:0 16px 42px rgba(11,49,90,.11); --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#f3f8fb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:var(--blue)}
+    .skip{position:absolute;left:-9999px;top:10px;background:#fff;padding:10px;z-index:99}.skip:focus{left:10px}
+    .topbar{height:9px;background:linear-gradient(90deg,var(--navy),var(--cyan))}
+    header.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#fff 0%,#eff9fd 64%,#d8f1fa 100%);border-bottom:1px solid var(--line)}
+    header.hero:after{content:"</>";position:absolute;right:5vw;bottom:-55px;font:900 190px/1 ui-monospace,monospace;color:rgba(32,166,216,.09);transform:rotate(-7deg)}
+    .hero-inner{max-width:1180px;margin:auto;padding:30px 24px 46px;position:relative;z-index:1}
+    .brand{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:40px}
+    .brand img{width:176px;height:auto}.brand span{color:var(--muted);font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;font-weight:750}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#dff4fb;color:var(--navy);font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(32,166,216,.15)}
+    h1{max-width:780px;margin:18px 0 12px;color:var(--navy);font-size:clamp(2.35rem,6vw,4.75rem);line-height:1.02;letter-spacing:-.045em}
+    .lead{max-width:720px;font-size:clamp(1.05rem,2vw,1.28rem);color:var(--muted);margin:0}
+    .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 13px;color:var(--navy);font-size:.87rem;font-weight:700}
+    .progress-wrap{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .progress{height:4px;background:#e9f1f5}.progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .2s}
+    nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:8px;padding:10px 24px;overflow:auto;scrollbar-width:thin}
+    nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:.86rem;font-weight:750;padding:7px 10px;border-radius:9px}nav a:hover,nav a:focus{background:var(--sky);color:var(--navy)}
+    main{max-width:1180px;margin:auto;padding:42px 24px 70px}
+    section.lesson{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(22px,4vw,42px);margin-bottom:28px;scroll-margin-top:80px}
+    .section-head{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;margin-bottom:25px}
+    .step{width:44px;height:44px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900}
+    h2{color:var(--navy);font-size:clamp(1.55rem,3vw,2.2rem);line-height:1.12;margin:2px 0 5px;letter-spacing:-.02em}.section-head p{margin:0;color:var(--muted)}
+    h3{color:var(--navy);font-size:1.08rem;margin:0 0 9px}.kicker{color:var(--cyan);font-weight:850;text-transform:uppercase;letter-spacing:.08em;font-size:.76rem}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--pale)}.card p:last-child{margin-bottom:0}.card.good{border-left:5px solid var(--green)}.card.warn{border-left:5px solid var(--amber)}
+    .callout{margin-top:18px;border:1px solid #b7ddcf;background:var(--green-pale);border-radius:14px;padding:15px 17px;display:flex;gap:11px}.callout b{color:var(--green)}
+    .code{position:relative;background:#102f49;color:#daf1ff;border-radius:16px;padding:18px;overflow:auto;font:500 .9rem/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;tab-size:2}.code .tag{color:#78d5f4}.code .attr{color:#ffd27a}.code .value{color:#a7e8c9}
+    .mini-code{display:block;background:#102f49;color:#d9effc;border-radius:10px;padding:9px 11px;font:500 .82rem/1.45 ui-monospace,monospace;overflow:auto}
+    .tool-list{display:grid;gap:10px;margin-top:14px}.tool-link{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;background:#fff;font-weight:750}.tool-link span{font-size:.78rem;color:var(--muted);font-weight:600}.tool-link:hover{border-color:var(--cyan);transform:translateY(-1px)}
+    .anatomy{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:17px 0;background:#fff}.anatomy-code{display:flex;justify-content:center;flex-wrap:wrap;padding:24px 12px;background:#102f49;font:750 clamp(.94rem,3vw,1.35rem)/1.7 ui-monospace,monospace}.anatomy-code button{border:0;background:transparent;color:#dff5ff;padding:4px 2px;border-radius:7px}.anatomy-code button:hover,.anatomy-code button:focus,.anatomy-code button.active{background:#235474;outline:2px solid #62caed;outline-offset:2px}.anatomy-info{min-height:84px;padding:16px 18px}.anatomy-info b{color:var(--blue)}
+    .workspace{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:17px;overflow:hidden;min-height:370px}.workspace-pane{min-width:0;background:#fff}.workspace-pane+.workspace-pane{border-left:1px solid var(--line)}.pane-head{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--pale);border-bottom:1px solid var(--line);font-weight:800;color:var(--navy);font-size:.84rem}.pane-head button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:6px 10px;font-weight:800}.pane-head button:hover{background:var(--navy)}textarea.editor{display:block;width:100%;height:325px;resize:vertical;border:0;padding:16px;outline:0;background:#102f49;color:#e3f5ff;font:500 .84rem/1.55 ui-monospace,monospace}iframe.preview{display:block;width:100%;height:325px;border:0;background:#fff}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:999px;padding:8px 12px;font-weight:800}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .attribute-output{border-radius:14px;background:#102f49;color:#dff5ff;padding:18px;font:700 1rem/1.5 ui-monospace,monospace;overflow:auto}.attribute-explain{min-height:82px;margin-top:12px;border:1px solid var(--line);background:var(--pale);padding:14px;border-radius:13px}
+    .attr-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.91rem}.attr-table th{background:var(--navy);color:#fff;text-align:left}.attr-table th,.attr-table td{padding:10px 11px;border:1px solid var(--line);vertical-align:top}.attr-table tr:nth-child(even) td{background:var(--pale)}
+    .nest-tree{display:grid;gap:8px}.nest-row{padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;font:700 .9rem ui-monospace,monospace}.nest-row:nth-child(2){margin-left:25px;background:#f3fbfe}.nest-row:nth-child(3){margin-left:50px;background:#e8f7fc}
+    .semantic-toggle{display:flex;gap:8px;margin-bottom:15px}.semantic-toggle button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:800;color:var(--navy)}.semantic-toggle button.active{background:var(--navy);color:#fff}.page-map{max-width:650px;margin:auto;display:grid;gap:8px;text-align:center}.zone{border:2px solid #a9dcea;border-radius:10px;padding:11px;background:#effafe;color:var(--navy);font-weight:850}.zone.main{display:grid;grid-template-columns:2fr 1fr;gap:8px;background:#fff;border-color:var(--line)}.zone.main>div{display:grid;gap:8px}.zone.inner{font-size:.9rem}.zone.aside{display:grid;place-items:center;background:#eaf7f3;border-color:#a8d9c8}
+    .emmet-game{display:grid;gap:10px}.match{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}.match code{background:#102f49;color:#dff5ff;padding:10px 12px;border-radius:10px}.match select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff}.game-result{margin-top:10px;font-weight:850;min-height:24px}
+    .layout-demo{border:1px dashed #9fcde0;border-radius:14px;padding:14px;background:#fbfeff}.demo-row{font-size:0}.demo-box{display:inline-block;vertical-align:top;min-height:105px;padding:14px;font-size:.92rem;background:#fff}.demo-left{width:40%;border:2px solid #283a46}.demo-right{width:50%;border:2px solid var(--blue)}.demo-bottom{width:auto;height:110px;margin-top:20px;border:2px solid #c6a300;padding:14px;background:#fff}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.controls label{font-size:.85rem;font-weight:800;color:var(--navy)}.controls input{width:100%}
+    .quiz-item{border-top:1px solid var(--line);padding:20px 0}.quiz-item:first-child{border-top:0;padding-top:0}.quiz-item fieldset{border:0;padding:0;margin:0}.quiz-item legend{font-weight:850;color:var(--navy);margin-bottom:9px}.option{display:block;border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin:7px 0;background:#fff}.option:hover{background:var(--pale)}.option input{margin-right:8px}.quiz-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.primary{border:0;background:var(--blue);color:#fff;border-radius:11px;padding:11px 16px;font-weight:850}.primary:hover{background:var(--navy)}.secondary{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:11px;padding:10px 15px;font-weight:850}.score{font-weight:900;color:var(--green)}
+    .feedback{margin-top:7px;font-size:.88rem;font-weight:750}.feedback.ok{color:var(--green)}.feedback.bad{color:var(--red)}
+    footer{background:var(--navy);color:#d9edf8}.footer-inner{max-width:1180px;margin:auto;padding:32px 24px;display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-inner b{color:#fff}.footer-inner p{margin:2px 0}.to-top{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 12px;font-weight:800}
+    @media (max-width:800px){.grid-2,.grid-3,.workspace{grid-template-columns:1fr}.workspace-pane+.workspace-pane{border-left:0;border-top:1px solid var(--line)}.brand{align-items:flex-start}.brand img{width:138px}.brand span{max-width:160px;text-align:right}.match{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.footer-inner{align-items:flex-start;flex-direction:column}.attr-table{font-size:.82rem}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div class="topbar"></div>
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="brand"><img src="data:image/png;base64,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" alt="Universidad Tecnológica de Pereira"><span>Material de refuerzo interactivo</span></div>
+      <span class="eyebrow">Introducción a HTML5</span>
+      <h1>Entender la estructura antes de escribirla</h1>
+      <p class="lead">Recorra etiquetas, atributos, contenido, bloques y semántica. Pruebe los ejemplos y cierre con los dos retos de distribución de la presentación.</p>
+      <div class="hero-meta"><span class="pill">✓ 5 momentos</span><span class="pill">✓ Ejemplos editables</span><span class="pill">✓ Autoevaluación</span></div>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    <nav aria-label="Navegación del material">
+      <a href="#fundamento">1 · HTML</a><a href="#etiquetas">2 · Etiquetas</a><a href="#atributos">3 · Atributos</a><a href="#organizacion">4 · Organización</a><a href="#retos">5 · Retos</a><a href="#comprobacion">Comprobación</a>
+    </nav>
+  </div>
+
+  <main id="contenido">
+    <section class="lesson" id="fundamento">
+      <div class="section-head"><div class="step">1</div><div><span class="kicker">Fundamento</span><h2>¿Qué es HTML?</h2><p>HTML significa <i>HyperText Markup Language</i> y organiza el contenido que interpreta el navegador.</p></div></div>
+      <div class="grid-2">
+        <article class="card good"><h3>HTML sí es…</h3><p>Un <b>lenguaje de marcado</b>. Sus etiquetas describen la estructura y el sentido del contenido de una página web.</p></article>
+        <article class="card warn"><h3>HTML no es…</h3><p>Un lenguaje de programación. Por sí solo no ejecuta funciones algorítmicas.</p></article>
+      </div>
+      <div class="callout"><div>💡</div><div><b>Versión trabajada:</b> las diapositivas presentan HTML5.</div></div>
+      <div class="grid-2" style="margin-top:20px">
+        <div>
+          <h3>Herramientas instaladas</h3>
+          <p>Puede escribir el documento en un editor de texto como <b>Sublime Text</b> o <b>Visual Studio Code</b>.</p>
+        </div>
+        <div>
+          <h3>Editores en línea</h3>
+          <div class="tool-list">
+            <a class="tool-link" href="https://codepen.io/" target="_blank" rel="noopener">CodePen <span>Abrir ↗</span></a>
+            <a class="tool-link" href="https://www.tutorialspoint.com/online_html_editor.php" target="_blank" rel="noopener">TutorialsPoint <span>Abrir ↗</span></a>
+            <a class="tool-link" href="https://www.onlinegdb.com/online_html_compiler" target="_blank" rel="noopener">OnlineGDB <span>Abrir ↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson" id="etiquetas">
+      <div class="section-head"><div class="step">2</div><div><span class="kicker">Anatomía</span><h2>Etiquetas, contenido y comentarios</h2><p>Seleccione cada fragmento para reconocer la función que cumple.</p></div></div>
+      <div class="anatomy">
+        <div class="anatomy-code" aria-label="Ejemplo interactivo de etiqueta">
+          <button data-part="apertura">&lt;strong</button><button data-part="atributo">&nbsp;id=</button><button data-part="valor">&quot;dato&quot;&gt;</button><button data-part="contenido">Contenido</button><button data-part="cierre">&lt;/strong&gt;</button>
+        </div>
+        <div class="anatomy-info" id="anatomyInfo"><b>Explore la etiqueta:</b> seleccione uno de los cinco fragmentos.</div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>&lt;p&gt;</h3><code class="mini-code">&lt;p&gt;Hola mundo&lt;/p&gt;</code><p>Contiene un párrafo.</p></article>
+        <article class="card"><h3>&lt;strong&gt;</h3><code class="mini-code">&lt;strong&gt;Hola mundo&lt;/strong&gt;</code><p>Da importancia al contenido.</p></article>
+        <article class="card"><h3>&lt;input&gt;</h3><code class="mini-code">&lt;input type="text"&gt;</code><p>Usa un atributo para indicar el tipo.</p></article>
+      </div>
+
+      <div class="grid-2" style="margin-top:20px">
+        <div>
+          <h3>Contenido anidado</h3>
+          <p>El contenido también puede incluir otras etiquetas.</p>
+          <div class="nest-tree"><div class="nest-row">&lt;ul&gt; … &lt;/ul&gt;</div><div class="nest-row">&lt;li&gt; … &lt;/li&gt;</div><div class="nest-row">&lt;strong&gt;HTML&lt;/strong&gt;</div></div>
+        </div>
+        <div>
+          <h3>Comentarios</h3>
+          <pre class="code">&lt;!-- Esta nota queda en el código --&gt;
+&lt;p&gt;Este texto sí se muestra&lt;/p&gt;</pre>
+          <p>El comentario comienza con <b>&lt;!--</b> y termina con <b>--&gt;</b>.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px">Pruebe una estructura</h3>
+      <div class="workspace">
+        <div class="workspace-pane"><div class="pane-head"><span>Código HTML</span><button id="runCode" type="button">Actualizar vista</button></div><textarea class="editor" id="htmlEditor" spellcheck="false"><!DOCTYPE html>
+<html>
+  <body>
+    <!-- Cambie el contenido -->
+    <p title="Mensaje">Hola mundo</p>
+    <strong id="dato">Contenido importante</strong>
+  </body>
+</html></textarea></div>
+        <div class="workspace-pane"><div class="pane-head"><span>Resultado</span><span>Vista previa</span></div><iframe class="preview" id="htmlPreview" title="Vista previa del código" sandbox></iframe></div>
+      </div>
+    </section>
+
+    <section class="lesson" id="atributos">
+      <div class="section-head"><div class="step">3</div><div><span class="kicker">Información adicional</span><h2>Atributos y valores</h2><p>El atributo se escribe en la apertura, después del nombre de la etiqueta y antes de &gt;.</p></div></div>
+      <div class="tabs" role="tablist" aria-label="Tipos de atributos">
+        <button class="tab active" data-attr-kind="finite" type="button">Conjunto finito</button><button class="tab" data-attr-kind="free" type="button">Valor libre</button><button class="tab" data-attr-kind="boolean" type="button">Booleano</button>
+      </div>
+      <div class="attribute-output" id="attributeOutput">&lt;input type="text"&gt;</div>
+      <div class="attribute-explain" id="attributeExplain"><b>Conjunto finito:</b> el atributo acepta una lista limitada de valores válidos.</div>
+
+      <h3 style="margin-top:24px">Atributos comunes</h3>
+      <div style="overflow:auto">
+        <table class="attr-table">
+          <thead><tr><th>Atributo</th><th>Valor</th><th>Descripción</th></tr></thead>
+          <tbody>
+            <tr><td><b>id</b></td><td>nombre</td><td>Identificador único en la página.</td></tr>
+            <tr><td><b>class</b></td><td>nombre</td><td>Clase que puede repetirse.</td></tr>
+            <tr><td><b>lang</b></td><td>idioma</td><td>Idioma conforme al código ISO 639-1.</td></tr>
+            <tr><td><b>translate</b></td><td>yes | no</td><td>Indica si el contenido es traducible.</td></tr>
+            <tr><td><b>title</b></td><td>título</td><td>Mensaje emergente al colocar el puntero.</td></tr>
+            <tr><td><b>style</b></td><td>estilos</td><td>Aplica propiedades CSS directamente.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><div>✓</div><div><b>Convención recomendada:</b> escriba los valores entre comillas dobles.</div></div>
+    </section>
+
+    <section class="lesson" id="organizacion">
+      <div class="section-head"><div class="step">4</div><div><span class="kicker">Bloques y sentido</span><h2>div, semántica y Emmet</h2><p>Un bloque organiza; una etiqueta semántica, además, comunica la función de esa zona.</p></div></div>
+      <div class="grid-2">
+        <div>
+          <h3>Un bloque con &lt;div&gt;</h3>
+          <pre class="code">&lt;div style="border:1px solid #1769aa;
+            width:45%; padding:12px;"&gt;
+  Bloque de contenido
+&lt;/div&gt;</pre>
+          <p><b>div</b> define un bloque o sección al que se pueden aplicar estilos.</p>
+        </div>
+        <div>
+          <h3>Mapa de una página</h3>
+          <div class="semantic-toggle"><button class="active" data-mode="semantic" type="button">Semántica</button><button data-mode="generic" type="button">Solo div</button></div>
+          <div class="page-map" id="pageMap"></div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:28px">Estructura básica HTML5</h3>
+      <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Título de la página&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;Encabezado&lt;/header&gt;
+    &lt;nav&gt;Navegación&lt;/nav&gt;
+    &lt;main&gt;&lt;section&gt;Contenido&lt;/section&gt;&lt;/main&gt;
+    &lt;footer&gt;Pie de página&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+      <div class="grid-2" style="margin-top:24px">
+        <div><h3>Emmet acelera la escritura</h3><p>Relacione cada abreviatura con el resultado que produciría.</p></div>
+        <div class="emmet-game" id="emmetGame">
+          <div class="match"><code>!</code><select data-answer="base"><option value="">Seleccione…</option><option value="div">Un div vacío</option><option value="base">La estructura inicial</option><option value="list">Una lista de tres</option></select></div>
+          <div class="match"><code>div</code><select data-answer="div"><option value="">Seleccione…</option><option value="list">Una lista de tres</option><option value="div">&lt;div&gt;&lt;/div&gt;</option><option value="base">La estructura inicial</option></select></div>
+          <div class="match"><code>ul&gt;li*3</code><select data-answer="list"><option value="">Seleccione…</option><option value="base">La estructura inicial</option><option value="list">Una ul con tres li</option><option value="div">Un div vacío</option></select></div>
+          <button class="secondary" id="checkEmmet" type="button">Comprobar Emmet</button><div class="game-result" id="emmetResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson" id="retos">
+      <div class="section-head"><div class="step">5</div><div><span class="kicker">Aplicación</span><h2>Retos con bloques</h2><p>La solución usa <i>inline-block</i> y <i>vertical-align</i>, sin flexbox ni grid.</p></div></div>
+      <div class="grid-2">
+        <div>
+          <h3>Reto 1 · Izquierda y derecha</h3>
+          <pre class="code">&lt;div style="display:inline-block; width:40%;
+ vertical-align:top; border:1px solid black;"&gt;
+ Izquierda
+&lt;/div&gt;
+&lt;div style="display:inline-block; width:50%;
+ vertical-align:top; border:1px solid blue;"&gt;
+ Derecha
+&lt;/div&gt;</pre>
+          <div class="controls"><label>Ancho izquierdo: <output id="leftOut">40%</output><input id="leftWidth" type="range" min="20" max="70" value="40"></label><label>Ancho derecho: <output id="rightOut">50%</output><input id="rightWidth" type="range" min="20" max="70" value="50"></label></div>
+        </div>
+        <div>
+          <h3>Resultado manipulable</h3>
+          <div class="layout-demo"><div class="demo-row"><div class="demo-box demo-left" id="leftBox">Izquierda</div>
+          <div class="demo-box demo-right" id="rightBox">Derecha</div></div><div class="demo-bottom" id="bottomBox">Debajo</div></div>
+          <div class="callout" id="widthMessage"><div>↔</div><div><b>Total:</b> 90%. Hay espacio disponible para mantener los bloques en la misma fila.</div></div>
+        </div>
+      </div>
+      <h3 style="margin-top:25px">Reto 2 · Agregar un bloque debajo</h3>
+      <p>El tercer <b>div</b> vuelve al comportamiento de bloque. <b>width:auto</b> adapta su ancho, <b>height:200px</b> define su altura y <b>margin-top:20px</b> separa la nueva fila.</p>
+      <button class="secondary" id="toggleBottom" type="button">Ocultar bloque inferior</button>
+    </section>
+
+    <section class="lesson" id="comprobacion">
+      <div class="section-head"><div class="step">✓</div><div><span class="kicker">Cierre</span><h2>Compruebe lo aprendido</h2><p>Seleccione una respuesta por pregunta y revise la retroalimentación.</p></div></div>
+      <form id="quizForm">
+        <div class="quiz-item" data-correct="b"><fieldset><legend>1. ¿Cuál es la función principal de HTML?</legend><label class="option"><input type="radio" name="q1" value="a"> Ejecutar cálculos algorítmicos.</label><label class="option"><input type="radio" name="q1" value="b"> Estructurar el contenido de una página.</label><label class="option"><input type="radio" name="q1" value="c"> Sustituir un editor de texto.</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="c"><fieldset><legend>2. ¿Dónde se escriben los atributos?</legend><label class="option"><input type="radio" name="q2" value="a"> Después de la etiqueta de cierre.</label><label class="option"><input type="radio" name="q2" value="b"> Dentro del contenido.</label><label class="option"><input type="radio" name="q2" value="c"> En la apertura, después del nombre.</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="a"><fieldset><legend>3. ¿Qué atributo debe tener un valor único en la página?</legend><label class="option"><input type="radio" name="q3" value="a"> id</label><label class="option"><input type="radio" name="q3" value="b"> class</label><label class="option"><input type="radio" name="q3" value="c"> style</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="b"><fieldset><legend>4. ¿Cómo se expresa verdadero en un atributo booleano de HTML5?</legend><label class="option"><input type="radio" name="q4" value="a"> Siempre con ="true".</label><label class="option"><input type="radio" name="q4" value="b"> Escribiendo solo el atributo.</label><label class="option"><input type="radio" name="q4" value="c"> Dentro de un comentario.</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="c"><fieldset><legend>5. ¿Qué delimitadores forman un comentario HTML?</legend><label class="option"><input type="radio" name="q5" value="a"> // y //</label><label class="option"><input type="radio" name="q5" value="b"> /* y */</label><label class="option"><input type="radio" name="q5" value="c"> &lt;!-- y --&gt;</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="a"><fieldset><legend>6. ¿Qué aporta una etiqueta semántica frente a un div genérico?</legend><label class="option"><input type="radio" name="q6" value="a"> Comunica la función de la zona.</label><label class="option"><input type="radio" name="q6" value="b"> Elimina la necesidad de etiquetas.</label><label class="option"><input type="radio" name="q6" value="c"> Convierte HTML en lenguaje de programación.</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="b"><fieldset><legend>7. ¿Qué hace Emmet?</legend><label class="option"><input type="radio" name="q7" value="a"> Muestra únicamente comentarios.</label><label class="option"><input type="radio" name="q7" value="b"> Acelera la escritura mediante abreviaturas.</label><label class="option"><input type="radio" name="q7" value="c"> Sustituye la estructura HTML.</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-item" data-correct="c"><fieldset><legend>8. ¿Qué propiedad alinea arriba los dos div del reto?</legend><label class="option"><input type="radio" name="q8" value="a"> margin-top</label><label class="option"><input type="radio" name="q8" value="b"> width</label><label class="option"><input type="radio" name="q8" value="c"> vertical-align: top</label></fieldset><div class="feedback"></div></div>
+        <div class="quiz-actions"><button class="primary" type="submit">Calificar</button><button class="secondary" id="resetQuiz" type="button">Reiniciar</button><span class="score" id="quizScore" aria-live="polite"></span></div>
+      </form>
+    </section>
+  </main>
+
+  <footer><div class="footer-inner"><div><b>Introducción a HTML5</b><p>Docente: Andrés Felipe Ramírez Correa</p><p>Universidad Tecnológica de Pereira</p></div><a class="to-top" href="#inicio">Volver arriba ↑</a></div></footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    function updateProgress(){
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = max > 0 ? window.scrollY / max : 0;
+      progressBar.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+    }
+    addEventListener('scroll', updateProgress, {passive:true}); updateProgress();
+
+    const anatomyText = {
+      apertura:'<b>Etiqueta de apertura:</b> contiene el nombre <code>strong</code> entre &lt; y &gt;. Se recomienda escribirlo en minúsculas.',
+      atributo:'<b>Atributo:</b> <code>id</code> indica qué información adicional se declara.',
+      valor:'<b>Valor:</b> <code>dato</code> concreta la información de <code>id</code> y se escribe entre comillas dobles.',
+      contenido:'<b>Contenido:</b> aparece después de la apertura y antes del cierre.',
+      cierre:'<b>Etiqueta de cierre:</b> repite el nombre y antepone una barra: <code>&lt;/strong&gt;</code>.'
+    };
+    document.querySelectorAll('[data-part]').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-part]').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active'); document.getElementById('anatomyInfo').innerHTML = anatomyText[btn.dataset.part];
+    }));
+
+    const editor = document.getElementById('htmlEditor'); const preview = document.getElementById('htmlPreview');
+    function renderPreview(){ preview.srcdoc = editor.value; }
+    document.getElementById('runCode').addEventListener('click', renderPreview); renderPreview();
+
+    const attributeData = {
+      finite:{code:'&lt;input type="text"&gt;', text:'<b>Conjunto finito:</b> el atributo acepta una lista limitada de valores válidos.'},
+      free:{code:'&lt;strong id="dato"&gt;Contenido&lt;/strong&gt;', text:'<b>Valor libre:</b> permite escribir libremente un texto, un nombre o una dirección URL.'},
+      boolean:{code:'&lt;input disabled&gt;', text:'<b>Booleano:</b> se escribe solo el atributo para indicar verdadero y se omite para indicar falso.'}
+    };
+    document.querySelectorAll('[data-attr-kind]').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-attr-kind]').forEach(x => x.classList.remove('active')); btn.classList.add('active');
+      const item=attributeData[btn.dataset.attrKind]; document.getElementById('attributeOutput').innerHTML=item.code; document.getElementById('attributeExplain').innerHTML=item.text;
+    }));
+
+    const pageMap=document.getElementById('pageMap');
+    function drawMap(mode){
+      const n = mode==='semantic' ? {h:'header',nav:'nav',main:'main',s:'section / article',a:'aside',f:'footer'} : {h:'div',nav:'div',main:'div',s:'div',a:'div',f:'div'};
+      pageMap.innerHTML=`<div class="zone">${n.h}</div><div class="zone">${n.nav}</div><div class="zone main"><div><div class="zone inner">${n.main}</div><div class="zone inner">${n.s}</div></div><div class="zone aside">${n.a}</div></div><div class="zone">${n.f}</div>`;
+    }
+    document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click',()=>{document.querySelectorAll('[data-mode]').forEach(x=>x.classList.remove('active'));btn.classList.add('active');drawMap(btn.dataset.mode);})); drawMap('semantic');
+
+    document.getElementById('checkEmmet').addEventListener('click',()=>{
+      const selects=[...document.querySelectorAll('#emmetGame select')]; const count=selects.filter(s=>s.value===s.dataset.answer).length;
+      const result=document.getElementById('emmetResult'); result.textContent=`${count} de ${selects.length} relaciones correctas.`; result.style.color=count===selects.length?'var(--green)':'var(--amber)';
+    });
+
+    const leftWidth=document.getElementById('leftWidth'), rightWidth=document.getElementById('rightWidth');
+    function updateWidths(){
+      const l=Number(leftWidth.value), r=Number(rightWidth.value), total=l+r;
+      document.getElementById('leftBox').style.width=l+'%'; document.getElementById('rightBox').style.width=r+'%';
+      document.getElementById('leftOut').value=l+'%'; document.getElementById('rightOut').value=r+'%';
+      const msg=document.getElementById('widthMessage'); msg.innerHTML=total<=95?`<div>↔</div><div><b>Total:</b> ${total}%. Hay espacio disponible para mantener los bloques en la misma fila.</div>`:`<div>!</div><div><b>Total:</b> ${total}%. El espacio entre elementos puede hacer que el segundo bloque baje.</div>`;
+      msg.style.background=total<=95?'var(--green-pale)':'#fff4e5';
+    }
+    leftWidth.addEventListener('input',updateWidths);rightWidth.addEventListener('input',updateWidths);updateWidths();
+    document.getElementById('toggleBottom').addEventListener('click',e=>{const box=document.getElementById('bottomBox');const hidden=box.hidden;box.hidden=!hidden;e.currentTarget.textContent=hidden?'Ocultar bloque inferior':'Mostrar bloque inferior';});
+
+    const quiz=document.getElementById('quizForm');
+    quiz.addEventListener('submit',e=>{
+      e.preventDefault(); let score=0; const items=[...quiz.querySelectorAll('.quiz-item')];
+      items.forEach(item=>{const selected=item.querySelector('input:checked');const ok=selected&&selected.value===item.dataset.correct; if(ok) score++; const f=item.querySelector('.feedback'); f.textContent=!selected?'Seleccione una respuesta.':ok?'Correcto.':'Revise este concepto en el recorrido.';f.className='feedback '+(ok?'ok':'bad');});
+      document.getElementById('quizScore').textContent=`Resultado: ${score} de ${items.length}`;
+    });
+    document.getElementById('resetQuiz').addEventListener('click',()=>{quiz.reset();document.querySelectorAll('.feedback').forEach(f=>{f.textContent='';f.className='feedback';});document.getElementById('quizScore').textContent='';});
+  </script>
+</body>
+</html>

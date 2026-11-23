@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratorio interactivo de UI/UX para la asignatura Computación Gráfica.">
+  <title>UI/UX | Computación Gráfica</title>
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <style>
+    :root {
+      color-scheme: light;
+      --utp: #003d6d;
+      --blue: #086f9a;
+      --blue-dark: #064e70;
+      --cyan: #28a7bb;
+      --teal: #14746f;
+      --amber: #a55a00;
+      --violet: #68498c;
+      --red: #a63836;
+      --ink: #172633;
+      --muted: #536574;
+      --paper: #ffffff;
+      --canvas: #edf3f6;
+      --line: #c8d6df;
+      --soft-blue: #e7f2f7;
+      --soft-teal: #e7f5f2;
+      --soft-amber: #fff2db;
+      --soft-violet: #f0eaf7;
+      --soft-red: #fbeceb;
+      --shadow: 0 18px 52px rgba(21, 48, 67, .11);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--canvas);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 9% 3%, rgba(40, 167, 187, .12), transparent 27rem),
+        linear-gradient(180deg, #f8fbfc 0, var(--canvas) 35rem);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    a {
+      color: var(--utp);
+      text-decoration-thickness: .09em;
+      text-underline-offset: .18em;
+    }
+
+    a:hover { color: var(--blue); }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 6px var(--utp);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -6rem;
+      z-index: 100;
+      padding: .8rem 1rem;
+      border-radius: .55rem;
+      color: #fff;
+      background: var(--utp);
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    .institution-bar {
+      border-bottom: 1px solid rgba(0, 61, 109, .14);
+      background: rgba(255, 255, 255, .88);
+      backdrop-filter: blur(12px);
+    }
+
+    .institution-inner {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: .72rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .institution-name {
+      display: flex;
+      align-items: center;
+      gap: .72rem;
+      min-width: 0;
+    }
+
+    .utp-mark {
+      display: grid;
+      place-items: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex: 0 0 auto;
+      border-radius: .68rem .22rem .68rem .22rem;
+      color: #fff;
+      background: var(--utp);
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    .institution-copy { line-height: 1.18; }
+    .institution-copy strong { display: block; font-size: .9rem; }
+    .institution-copy span { color: var(--muted); font-size: .78rem; }
+
+    .course-label {
+      color: var(--utp);
+      font-size: .83rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    main { overflow: clip; }
+
+    .intro {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(2.8rem, 6vw, 5.3rem) 0 2.25rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(18rem, .92fr);
+      gap: clamp(2rem, 6vw, 5.5rem);
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 .75rem;
+      color: var(--blue);
+      font-size: .8rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.12; }
+
+    h1 {
+      max-width: 14ch;
+      margin: 0;
+      color: var(--utp);
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      letter-spacing: -.055em;
+    }
+
+    .lead {
+      max-width: 62ch;
+      margin: 1.2rem 0 0;
+      color: #334a59;
+      font-size: clamp(1.04rem, 2vw, 1.22rem);
+    }
+
+    .meta {
+      margin: 1.4rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem 1.2rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .46rem;
+    }
+
+    .meta-dot {
+      width: .48rem;
+      height: .48rem;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    .intro-map {
+      position: relative;
+      padding: 1.45rem;
+      border: 1px solid rgba(0, 61, 109, .14);
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, .83);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-map::before {
+      content: "";
+      position: absolute;
+      inset: .55rem;
+      pointer-events: none;
+      border: 1px solid rgba(0, 61, 109, .07);
+      border-radius: 1rem;
+    }
+
+    .map-label {
+      position: relative;
+      margin: 0 0 1rem;
+      color: var(--utp);
+      font-size: .8rem;
+      font-weight: 850;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .map-pair {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .map-card {
+      min-height: 8.3rem;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    .map-card.ui { background: var(--soft-blue); }
+    .map-card.ux { background: var(--soft-teal); }
+    .map-card b { display: block; margin-bottom: .35rem; color: var(--utp); font-size: 1.25rem; }
+    .map-card span { display: block; color: var(--muted); font-size: .86rem; line-height: 1.45; }
+    .map-plus { color: var(--blue); font-size: 1.4rem; font-weight: 900; }
+
+    .map-result {
+      position: relative;
+      margin: 1rem 0 0;
+      padding: .75rem .9rem;
+      border-radius: .75rem;
+      color: #fff;
+      background: var(--utp);
+      font-size: .88rem;
+      text-align: center;
+    }
+
+    .key-idea {
+      width: min(980px, calc(100% - 2rem));
+      margin: 0 auto 3rem;
+      padding: 1.25rem 1.4rem;
+      border-left: .32rem solid var(--cyan);
+      border-radius: .25rem 1rem 1rem .25rem;
+      background: rgba(255, 255, 255, .78);
+    }
+
+    .key-idea strong { color: var(--utp); }
+
+    .section {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 4.3rem 0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .section-kicker {
+      margin: 0 0 .55rem;
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--utp);
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      letter-spacing: -.035em;
+    }
+
+    .section-head p {
+      margin: .9rem 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .lab-shell {
+      display: grid;
+      grid-template-columns: minmax(18rem, .74fr) minmax(0, 1.26fr);
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .control-panel,
+    .preview-panel {
+      border: 1px solid rgba(0, 61, 109, .14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+    }
+
+    .control-panel { padding: 1.35rem; }
+
+    .score-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: var(--soft-blue);
+    }
+
+    .score-ring {
+      display: grid;
+      place-items: center;
+      width: 4.6rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      color: #fff;
+      background: conic-gradient(var(--blue) var(--score-angle, 18%), #b9d5e0 0);
+      font-size: 1rem;
+      font-weight: 850;
+      position: relative;
+    }
+
+    .score-ring::before {
+      content: "";
+      position: absolute;
+      inset: .45rem;
+      border-radius: 50%;
+      background: var(--utp);
+    }
+
+    .score-ring span { position: relative; }
+    .score-copy strong { display: block; color: var(--utp); }
+    .score-copy span { color: var(--muted); font-size: .84rem; }
+
+    .principle-controls {
+      display: grid;
+      gap: .62rem;
+    }
+
+    .principle-button {
+      width: 100%;
+      min-height: 3.2rem;
+      padding: .72rem .82rem;
+      display: grid;
+      grid-template-columns: 2rem 1fr auto;
+      gap: .72rem;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .18s ease, transform .18s ease, background .18s ease;
+    }
+
+    .principle-button:hover {
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .principle-button[aria-pressed="true"] {
+      border-color: var(--blue);
+      background: var(--soft-blue);
+    }
+
+    .principle-icon {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: .55rem;
+      color: var(--utp);
+      background: var(--soft-blue);
+      font-size: .85rem;
+      font-weight: 900;
+    }
+
+    .principle-name { font-size: .92rem; font-weight: 760; }
+    .switch-state { color: var(--muted); font-size: .75rem; font-weight: 750; text-transform: uppercase; }
+
+    .lab-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+
+    .action-button {
+      min-height: 2.75rem;
+      padding: .6rem .9rem;
+      border: 1px solid var(--utp);
+      border-radius: .7rem;
+      color: #fff;
+      background: var(--utp);
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    .action-button.secondary { color: var(--utp); background: #fff; }
+
+    .preview-panel {
+      padding: 1.15rem;
+      background: #dfe8ed;
+      overflow: hidden;
+    }
+
+    .preview-header {
+      margin: 0 0 .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .window-dots { display: inline-flex; gap: .3rem; }
+    .window-dots i { width: .55rem; height: .55rem; border-radius: 50%; background: #9eafb9; }
+
+    .mock-app {
+      --mock-bg: #aeb7bd;
+      --mock-card: #bfc6ca;
+      --mock-text: #8d979e;
+      --mock-accent: #aab4ba;
+      --mock-radius: 2px;
+      --mock-gap: .32rem;
+      position: relative;
+      min-height: 33rem;
+      padding: .62rem;
+      border: 1px solid #a5b1b8;
+      border-radius: .6rem;
+      color: var(--mock-text);
+      background: var(--mock-bg);
+      font-family: Arial, sans-serif;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .mock-app * { transition: all .22s ease; }
+
+    .mock-top {
+      padding: .45rem .4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: var(--mock-radius);
+      background: var(--mock-card);
+    }
+
+    .mock-brand { font-size: .72rem; font-weight: 400; letter-spacing: .02em; }
+    .mock-nav { display: flex; gap: .15rem; }
+    .mock-nav span { padding: .1rem .25rem; font-size: .62rem; }
+
+    .mock-main {
+      width: 100%;
+      margin: var(--mock-gap) auto 0;
+      padding: .45rem;
+      background: var(--mock-card);
+      border-radius: var(--mock-radius);
+    }
+
+    .mock-heading { margin: 0; font-size: .79rem; font-weight: 400; letter-spacing: .02em; }
+    .mock-sub { margin: .15rem 0 .35rem; font-size: .7rem; }
+
+    .mock-form {
+      display: grid;
+      grid-template-columns: 1.45fr .7fr 1fr;
+      gap: var(--mock-gap);
+      align-items: end;
+    }
+
+    .mock-field { min-width: 0; }
+    .mock-field label { display: none; }
+    .fake-input {
+      height: 1.6rem;
+      padding: .27rem;
+      border: 1px solid #a9b3b9;
+      border-radius: var(--mock-radius);
+      background: #c7cdd1;
+      font-size: .58rem;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .mock-options {
+      margin: var(--mock-gap) 0;
+      display: flex;
+      gap: .15rem;
+    }
+
+    .mock-chip {
+      min-width: 1.25rem;
+      height: 1rem;
+      padding: .05rem .2rem;
+      border: 0;
+      border-radius: 0;
+      color: var(--mock-text);
+      background: #c7cdd1;
+      font-size: .5rem;
+    }
+
+    .mock-summary {
+      margin-top: var(--mock-gap);
+      padding: .35rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: .18rem;
+      border: 1px solid #aeb8be;
+      background: #b8c0c5;
+    }
+
+    .mock-summary div { font-size: .58rem; }
+    .mock-summary strong { display: block; font-size: .6rem; font-weight: 400; }
+
+    .mock-actions {
+      margin-top: .28rem;
+      display: flex;
+      gap: .15rem;
+      justify-content: flex-start;
+    }
+
+    .mock-primary,
+    .mock-secondary {
+      min-height: 1.2rem;
+      padding: .15rem .35rem;
+      border: 0;
+      border-radius: 0;
+      color: #9aa3a9;
+      background: var(--mock-accent);
+      font-size: .5rem;
+      font-weight: 400;
+    }
+
+    .mock-status {
+      height: 0;
+      margin-top: 0;
+      padding: 0;
+      opacity: 0;
+      overflow: hidden;
+      font-size: .65rem;
+    }
+
+    .mock-foot {
+      position: absolute;
+      right: .55rem;
+      bottom: .35rem;
+      color: #9ba5ab;
+      font-size: .5rem;
+    }
+
+    .mock-app.fix-hierarchy .mock-main { width: min(92%, 35rem); padding: 1.25rem; }
+    .mock-app.fix-hierarchy .mock-heading { color: var(--utp); font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; }
+    .mock-app.fix-hierarchy .mock-sub { margin: .28rem 0 1rem; font-size: .78rem; }
+    .mock-app.fix-hierarchy .mock-summary strong { font-size: .67rem; font-weight: 750; }
+
+    .mock-app.fix-contrast {
+      --mock-bg: #eff4f7;
+      --mock-card: #ffffff;
+      --mock-text: #243642;
+      --mock-accent: var(--utp);
+    }
+    .mock-app.fix-contrast .fake-input { border-color: #8297a4; background: #fff; }
+    .mock-app.fix-contrast .mock-primary { color: #fff; }
+    .mock-app.fix-contrast .mock-secondary { border: 1px solid var(--utp); color: var(--utp); background: #fff; }
+
+    .mock-app.fix-grouping { --mock-gap: .82rem; }
+    .mock-app.fix-grouping .mock-form { grid-template-columns: 1fr 1fr; gap: .78rem; }
+    .mock-app.fix-grouping .mock-field:first-child { grid-column: 1 / -1; }
+    .mock-app.fix-grouping .mock-summary { margin-top: 1rem; padding: .85rem; gap: .7rem; }
+    .mock-app.fix-grouping .mock-actions { margin-top: .85rem; gap: .65rem; justify-content: flex-end; }
+
+    .mock-app.fix-consistency { --mock-radius: 9px; }
+    .mock-app.fix-consistency .mock-chip { height: 1.65rem; padding: .25rem .5rem; border: 1px solid #98aab4; border-radius: 999px; font-size: .6rem; }
+    .mock-app.fix-consistency .mock-primary,
+    .mock-app.fix-consistency .mock-secondary { min-height: 2rem; padding: .35rem .7rem; border-radius: .5rem; font-size: .66rem; font-weight: 700; }
+
+    .mock-app.fix-feedback .mock-status {
+      height: auto;
+      margin-top: .7rem;
+      padding: .55rem .7rem;
+      border-left: 3px solid var(--teal);
+      border-radius: .25rem .5rem .5rem .25rem;
+      color: #145a55;
+      background: #e8f5f2;
+      opacity: 1;
+    }
+
+    .mock-app.fix-accessibility .mock-field label { display: block; margin-bottom: .18rem; color: #283f4d; font-size: .6rem; font-weight: 700; }
+    .mock-app.fix-accessibility .mock-chip { min-width: 2rem; min-height: 1.75rem; }
+    .mock-app.fix-accessibility .mock-primary,
+    .mock-app.fix-accessibility .mock-secondary { min-height: 2.2rem; }
+    .mock-app.fix-accessibility .mock-primary::after { content: " →"; }
+
+    .change-note {
+      margin: .9rem 0 0;
+      min-height: 3.3rem;
+      padding: .78rem .9rem;
+      border-radius: .75rem;
+      color: #284555;
+      background: rgba(255, 255, 255, .8);
+      font-size: .84rem;
+    }
+
+    .no-js .principle-controls,
+    .no-js .lab-actions,
+    .no-js .filter-controls { display: none; }
+
+    .no-js .mock-app {
+      --mock-bg: #eff4f7;
+      --mock-card: #ffffff;
+      --mock-text: #243642;
+      --mock-accent: var(--utp);
+      --mock-radius: 9px;
+      --mock-gap: .82rem;
+    }
+
+    .no-js .mock-main { width: min(92%, 35rem); padding: 1.25rem; }
+    .no-js .mock-heading { color: var(--utp); font-size: 1.5rem; font-weight: 800; }
+    .no-js .mock-field label { display: block; }
+    .no-js .mock-status { height: auto; margin-top: .7rem; padding: .55rem .7rem; opacity: 1; }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .concept-card {
+      min-height: 17rem;
+      padding: 1.55rem;
+      border: 1px solid rgba(0, 61, 109, .13);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .88);
+    }
+
+    .concept-card.ui { border-top: .35rem solid var(--blue); }
+    .concept-card.ux { border-top: .35rem solid var(--teal); }
+    .concept-tag { color: var(--blue); font-size: .76rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+    .concept-card h3 { margin: .55rem 0 .7rem; color: var(--utp); font-size: 1.55rem; }
+    .concept-card p { color: var(--muted); }
+    .concept-card ul { margin: .8rem 0 0; padding-left: 1.2rem; }
+    .concept-card li + li { margin-top: .35rem; }
+
+    .equation {
+      margin-top: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: .85rem;
+      color: var(--utp);
+      background: var(--soft-blue);
+      font-weight: 760;
+    }
+
+    .filter-controls {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+
+    .filter-button {
+      min-height: 2.75rem;
+      padding: .55rem .9rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      font-size: .85rem;
+      font-weight: 720;
+      cursor: pointer;
+    }
+
+    .filter-button[aria-pressed="true"] { border-color: var(--utp); color: #fff; background: var(--utp); }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .principle-card {
+      min-height: 14rem;
+      padding: 1.25rem;
+      border: 1px solid rgba(0, 61, 109, .13);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, .9);
+    }
+
+    .principle-card[hidden] { display: none; }
+    .principle-card small { color: var(--blue); font-weight: 820; letter-spacing: .07em; text-transform: uppercase; }
+    .principle-card h3 { margin: .55rem 0 .55rem; color: var(--utp); font-size: 1.12rem; }
+    .principle-card p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .principle-card .test { margin-top: .8rem; padding-top: .75rem; border-top: 1px solid var(--line); color: var(--ink); font-size: .82rem; }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .75rem;
+    }
+
+    .process-step {
+      position: relative;
+      min-height: 13rem;
+      padding: 1.2rem;
+      border-radius: 1rem;
+      background: #fff;
+      border: 1px solid rgba(0, 61, 109, .13);
+    }
+
+    .process-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -.72rem;
+      top: 1.1rem;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-size: .78rem;
+      font-weight: 850;
+    }
+
+    .process-number { color: var(--cyan); font-size: 1.9rem; font-weight: 900; }
+    .process-step h3 { margin: .35rem 0 .55rem; color: var(--utp); font-size: 1.02rem; }
+    .process-step p { margin: 0; color: var(--muted); font-size: .84rem; }
+
+    .graphics-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1rem;
+    }
+
+    .graphics-map,
+    .practice-card {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid rgba(0, 61, 109, .13);
+    }
+
+    .graphics-map h3,
+    .practice-card h3 { margin: 0 0 1rem; color: var(--utp); }
+
+    .graphics-row {
+      display: grid;
+      grid-template-columns: minmax(8rem, .8fr) 1.2fr;
+      gap: .8rem;
+      padding: .72rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .graphics-row:first-of-type { border-top: 0; }
+    .graphics-row strong { color: var(--blue-dark); }
+    .graphics-row span { color: var(--muted); font-size: .88rem; }
+
+    .practice-list { margin: 0; padding-left: 1.25rem; }
+    .practice-list li + li { margin-top: .65rem; }
+    .practice-card .prompt {
+      margin-top: 1.15rem;
+      padding: .9rem 1rem;
+      border-left: .28rem solid var(--amber);
+      border-radius: .25rem .75rem .75rem .25rem;
+      background: var(--soft-amber);
+      color: #5d3c13;
+      font-size: .9rem;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+    }
+
+    .check-item {
+      padding: .9rem 1rem;
+      display: grid;
+      grid-template-columns: 1.6rem 1fr;
+      gap: .65rem;
+      align-items: start;
+      border-radius: .8rem;
+      background: #fff;
+      border: 1px solid rgba(0, 61, 109, .13);
+    }
+
+    .check-mark {
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--teal);
+      font-size: .74rem;
+      font-weight: 900;
+    }
+
+    .sources {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .sources li + li { margin-top: .65rem; }
+
+    footer {
+      margin-top: 2rem;
+      color: #dbe9f1;
+      background: var(--utp);
+    }
+
+    .footer-inner {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: .85rem;
+    }
+
+    .footer-inner strong { color: #fff; }
+
+    @media (max-width: 940px) {
+      .intro,
+      .lab-shell,
+      .graphics-grid { grid-template-columns: 1fr; }
+      .intro { align-items: start; }
+      .principles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-step:not(:last-child)::after { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .institution-copy span { display: none; }
+      .course-label { font-size: .72rem; }
+      .intro { padding-top: 2.3rem; }
+      .map-pair { grid-template-columns: 1fr; }
+      .map-plus { text-align: center; }
+      .concept-grid,
+      .principles-grid,
+      .process,
+      .checklist { grid-template-columns: 1fr; }
+      .mock-app { min-height: 36rem; }
+      .mock-form,
+      .mock-app.fix-grouping .mock-form { grid-template-columns: 1fr; }
+      .mock-app.fix-grouping .mock-field:first-child { grid-column: auto; }
+      .graphics-row { grid-template-columns: 1fr; gap: .1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .institution-bar { position: static; }
+      .intro, .section { padding: 2rem 0; }
+      .lab-shell, .graphics-grid { grid-template-columns: 1fr; }
+      .control-panel, .filter-controls, .lab-actions { display: none !important; }
+      .preview-panel, .concept-card, .principle-card, .process-step, .graphics-map, .practice-card { box-shadow: none; break-inside: avoid; }
+      .principles-grid { grid-template-columns: repeat(2, 1fr); }
+      .principle-card[hidden] { display: block; }
+      a { color: var(--ink); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="institution-bar">
+    <div class="institution-inner">
+      <div class="institution-name">
+        <span class="utp-mark" aria-hidden="true">UTP</span>
+        <div class="institution-copy">
+          <strong>Universidad Tecnológica de Pereira</strong>
+          <span>Material académico asincrónico</span>
+        </div>
+      </div>
+      <div class="course-label">Computación Gráfica</div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="intro" aria-labelledby="titulo-principal">
+      <div>
+        <p class="eyebrow">Laboratorio interactivo · UI/UX</p>
+        <h1 id="titulo-principal">Diseñar para ver, comprender y actuar</h1>
+        <p class="lead">Una interfaz no se evalúa solo por su apariencia. Explora cómo las decisiones gráficas orientan la atención, comunican el estado del sistema y hacen posible —o difícil— completar una tarea.</p>
+        <div class="meta" aria-label="Información del recurso">
+          <span><i class="meta-dot" aria-hidden="true"></i>35–45 minutos</span>
+          <span><i class="meta-dot" aria-hidden="true"></i>Exploración autónoma</span>
+          <span><i class="meta-dot" aria-hidden="true"></i>Sin instalación</span>
+        </div>
+      </div>
+      <aside class="intro-map" aria-label="Relación entre UI y UX">
+        <p class="map-label">Dos lentes, una experiencia</p>
+        <div class="map-pair">
+          <div class="map-card ui">
+            <b>UI</b>
+            <span>Lo que se presenta y se manipula: composición, tipografía, color, controles y movimiento.</span>
+          </div>
+          <div class="map-plus" aria-hidden="true">+</div>
+          <div class="map-card ux">
+            <b>UX</b>
+            <span>La experiencia completa: utilidad, comprensión, esfuerzo, emociones y contexto de uso.</span>
+          </div>
+        </div>
+        <p class="map-result">La UI forma parte de la UX, pero la UX también depende del contenido, el flujo, el rendimiento y el servicio.</p>
+      </aside>
+    </section>
+
+    <div class="key-idea">
+      <strong>Idea guía:</strong> una pantalla atractiva puede producir una mala experiencia, y una interfaz visualmente sobria puede funcionar muy bien. Diseñar exige observar a las personas, definir la tarea y comprobar el resultado.
+    </div>
+
+    <section class="section" aria-labelledby="laboratorio-titulo">
+      <div class="section-head">
+        <p class="section-kicker">01 · Experimenta</p>
+        <h2 id="laboratorio-titulo">Repara una interfaz, principio por principio</h2>
+        <p>Activa mejoras y observa cómo cambia una misma pantalla. El puntaje es una guía didáctica: en un proyecto real, la calidad se valida con personas y tareas concretas.</p>
+      </div>
+
+      <div class="lab-shell">
+        <div class="control-panel">
+          <div class="score-card">
+            <div class="score-ring" id="scoreRing" style="--score-angle:18%"><span id="scoreValue">18</span></div>
+            <div class="score-copy">
+              <strong>Claridad estimada</strong>
+              <span id="scoreLabel">La tarea exige demasiado esfuerzo visual.</span>
+            </div>
+          </div>
+
+          <div class="principle-controls" aria-label="Mejoras disponibles">
+            <button class="principle-button" type="button" data-fix="hierarchy" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">01</span>
+              <span class="principle-name">Jerarquía visual</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+            <button class="principle-button" type="button" data-fix="contrast" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">02</span>
+              <span class="principle-name">Contraste legible</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+            <button class="principle-button" type="button" data-fix="grouping" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">03</span>
+              <span class="principle-name">Agrupación y espacio</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+            <button class="principle-button" type="button" data-fix="consistency" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">04</span>
+              <span class="principle-name">Consistencia</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+            <button class="principle-button" type="button" data-fix="feedback" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">05</span>
+              <span class="principle-name">Retroalimentación</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+            <button class="principle-button" type="button" data-fix="accessibility" aria-pressed="false">
+              <span class="principle-icon" aria-hidden="true">06</span>
+              <span class="principle-name">Accesibilidad</span>
+              <span class="switch-state">Inactiva</span>
+            </button>
+          </div>
+
+          <div class="lab-actions">
+            <button class="action-button" id="applyAll" type="button">Aplicar todas</button>
+            <button class="action-button secondary" id="resetAll" type="button">Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="preview-panel">
+          <div class="preview-header">
+            <span>Vista simulada · Reserva de sala</span>
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="mock-app" id="mockApp" aria-hidden="true">
+            <div class="mock-top">
+              <span class="mock-brand">LABGRÁFICO</span>
+              <span class="mock-nav"><span>Inicio</span><span>Salas</span><span>Cuenta</span></span>
+            </div>
+            <div class="mock-main">
+              <h3 class="mock-heading">Reserva tu sala gráfica</h3>
+              <p class="mock-sub">Selecciona el recurso y confirma la disponibilidad.</p>
+              <div class="mock-form">
+                <div class="mock-field">
+                  <label>Recurso</label>
+                  <div class="fake-input">Estación con GPU</div>
+                </div>
+                <div class="mock-field">
+                  <label>Fecha</label>
+                  <div class="fake-input">12 / 09</div>
+                </div>
+                <div class="mock-field">
+                  <label>Horario</label>
+                  <div class="fake-input">14:00–16:00</div>
+                </div>
+              </div>
+              <div class="mock-options" aria-label="Opciones simuladas">
+                <span class="mock-chip">2D</span><span class="mock-chip">3D</span><span class="mock-chip">VR</span>
+              </div>
+              <div class="mock-summary">
+                <div><strong>Sala</strong>CG–04</div>
+                <div><strong>Duración</strong>2 horas</div>
+                <div><strong>Disponibilidad</strong>Disponible</div>
+              </div>
+              <div class="mock-actions">
+                <span class="mock-secondary">Volver</span>
+                <span class="mock-primary">Confirmar reserva</span>
+              </div>
+              <div class="mock-status">✓ La franja está disponible. Al confirmar recibirás el código de acceso.</div>
+            </div>
+            <span class="mock-foot">v.3.4.8</span>
+          </div>
+          <p class="change-note" id="changeNote" aria-live="polite">Comienza activando una mejora. Pregúntate qué elemento ves primero y cuál acción parece principal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="diferencia-titulo">
+      <div class="section-head">
+        <p class="section-kicker">02 · Distingue</p>
+        <h2 id="diferencia-titulo">UI y UX no son sinónimos</h2>
+        <p>Se complementan, pero responden preguntas diferentes. Confundirlas suele producir soluciones bonitas para problemas mal definidos.</p>
+      </div>
+      <div class="concept-grid">
+        <article class="concept-card ui">
+          <span class="concept-tag">Interfaz de usuario · UI</span>
+          <h3>¿Cómo se presenta la interacción?</h3>
+          <p>Trabaja con la capa visible y manipulable del sistema. En Computación Gráfica incluye decisiones de representación y respuesta visual.</p>
+          <ul>
+            <li>Composición, retícula, tipografía y color.</li>
+            <li>Botones, campos, iconos, estados y animaciones.</li>
+            <li>Activos vectoriales o raster y adaptación a pantallas.</li>
+          </ul>
+        </article>
+        <article class="concept-card ux">
+          <span class="concept-tag">Experiencia de usuario · UX</span>
+          <h3>¿Qué vive la persona al lograr su objetivo?</h3>
+          <p>Considera el recorrido completo antes, durante y después de usar la interfaz, en un contexto real y con restricciones concretas.</p>
+          <ul>
+            <li>Utilidad, facilidad de aprendizaje y confianza.</li>
+            <li>Arquitectura de información, contenido y flujo.</li>
+            <li>Investigación, prototipado, medición e iteración.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="equation">UX = interfaz + contenido + comportamiento + rendimiento + contexto + servicio</div>
+    </section>
+
+    <section class="section" aria-labelledby="principios-titulo">
+      <div class="section-head">
+        <p class="section-kicker">03 · Aplica</p>
+        <h2 id="principios-titulo">Principios que se pueden observar y probar</h2>
+        <p>Filtra las tarjetas por enfoque. Cada una incluye una pregunta útil para revisar un boceto, prototipo o producto.</p>
+      </div>
+      <div class="filter-controls" aria-label="Filtrar principios">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Todos</button>
+        <button class="filter-button" type="button" data-filter="visual" aria-pressed="false">Visual</button>
+        <button class="filter-button" type="button" data-filter="interaction" aria-pressed="false">Interacción</button>
+        <button class="filter-button" type="button" data-filter="accessibility" aria-pressed="false">Accesibilidad</button>
+        <button class="filter-button" type="button" data-filter="evaluation" aria-pressed="false">Evaluación</button>
+      </div>
+      <div class="principles-grid" id="principlesGrid">
+        <article class="principle-card" data-category="visual">
+          <small>Visual</small><h3>Jerarquía</h3>
+          <p>Tamaño, peso, posición y espacio establecen un orden de lectura. Si todo grita, nada guía.</p>
+          <p class="test"><strong>Prueba:</strong> ¿qué se percibe primero, segundo y tercero?</p>
+        </article>
+        <article class="principle-card" data-category="visual accessibility">
+          <small>Visual · Accesibilidad</small><h3>Contraste</h3>
+          <p>El contraste de luminancia mejora la legibilidad; el color no debe ser la única señal de significado.</p>
+          <p class="test"><strong>Prueba:</strong> ¿se entiende en escala de grises y con brillo bajo?</p>
+        </article>
+        <article class="principle-card" data-category="visual">
+          <small>Visual</small><h3>Proximidad</h3>
+          <p>Los elementos cercanos se interpretan como relacionados. El espacio también comunica estructura.</p>
+          <p class="test"><strong>Prueba:</strong> ¿los controles y datos relacionados forman grupos claros?</p>
+        </article>
+        <article class="principle-card" data-category="interaction">
+          <small>Interacción</small><h3>Consistencia</h3>
+          <p>Patrones repetibles reducen el aprendizaje y permiten transferir expectativas entre pantallas.</p>
+          <p class="test"><strong>Prueba:</strong> ¿la misma acción conserva nombre, aspecto y ubicación?</p>
+        </article>
+        <article class="principle-card" data-category="interaction accessibility">
+          <small>Interacción · Accesibilidad</small><h3>Retroalimentación</h3>
+          <p>El sistema debe comunicar qué ocurrió, qué está ocurriendo y qué puede hacerse después.</p>
+          <p class="test"><strong>Prueba:</strong> ¿cada acción importante produce una respuesta perceptible?</p>
+        </article>
+        <article class="principle-card" data-category="interaction">
+          <small>Interacción</small><h3>Prevención y recuperación</h3>
+          <p>Las restricciones y confirmaciones evitan fallos; deshacer y mensajes claros facilitan recuperarse.</p>
+          <p class="test"><strong>Prueba:</strong> ¿la interfaz ayuda sin culpar a la persona?</p>
+        </article>
+        <article class="principle-card" data-category="accessibility">
+          <small>Accesibilidad</small><h3>Operación diversa</h3>
+          <p>Las funciones deben poder usarse con teclado, puntero, tacto y tecnologías de asistencia.</p>
+          <p class="test"><strong>Prueba:</strong> ¿el foco es visible y el orden de navegación tiene sentido?</p>
+        </article>
+        <article class="principle-card" data-category="evaluation">
+          <small>Evaluación</small><h3>Contexto de uso</h3>
+          <p>Las necesidades cambian según las personas, las metas, el dispositivo y el entorno físico o social.</p>
+          <p class="test"><strong>Prueba:</strong> ¿para quién, para qué y en qué condiciones se diseña?</p>
+        </article>
+        <article class="principle-card" data-category="evaluation">
+          <small>Evaluación</small><h3>Evidencia</h3>
+          <p>El gusto del equipo no sustituye la observación: mide éxito, tiempo, errores y percepción.</p>
+          <p class="test"><strong>Prueba:</strong> ¿qué dato permitiría decidir entre dos alternativas?</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="proceso-titulo">
+      <div class="section-head">
+        <p class="section-kicker">04 · Itera</p>
+        <h2 id="proceso-titulo">Un proceso centrado en las personas</h2>
+        <p>No es una secuencia rígida. Los hallazgos de una prueba pueden devolver el proyecto a cualquier etapa.</p>
+      </div>
+      <div class="process">
+        <article class="process-step">
+          <span class="process-number">01</span><h3>Comprender</h3>
+          <p>Identificar personas, objetivos, dispositivos, entorno y restricciones.</p>
+        </article>
+        <article class="process-step">
+          <span class="process-number">02</span><h3>Definir</h3>
+          <p>Convertir hallazgos en requisitos y criterios observables de éxito.</p>
+        </article>
+        <article class="process-step">
+          <span class="process-number">03</span><h3>Organizar</h3>
+          <p>Estructurar contenido, navegación, flujo de tareas y jerarquía.</p>
+        </article>
+        <article class="process-step">
+          <span class="process-number">04</span><h3>Prototipar</h3>
+          <p>Representar ideas con la fidelidad mínima necesaria para aprender.</p>
+        </article>
+        <article class="process-step">
+          <span class="process-number">05</span><h3>Evaluar</h3>
+          <p>Observar tareas, medir resultados, interpretar y volver a diseñar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="cg-titulo">
+      <div class="section-head">
+        <p class="section-kicker">05 · Conecta</p>
+        <h2 id="cg-titulo">¿Dónde entra la Computación Gráfica?</h2>
+        <p>UI/UX define qué experiencia se necesita; la Computación Gráfica aporta medios para representarla con claridad, fluidez y eficiencia.</p>
+      </div>
+      <div class="graphics-grid">
+        <article class="graphics-map">
+          <h3>Decisión técnica → consecuencia perceptiva</h3>
+          <div class="graphics-row"><strong>Raster y vector</strong><span>La elección afecta nitidez, escalabilidad, peso y adaptación de iconos e imágenes.</span></div>
+          <div class="graphics-row"><strong>Color y luminancia</strong><span>Espacios de color, calibración y contraste condicionan lo que realmente se percibe.</span></div>
+          <div class="graphics-row"><strong>Retículas y transformaciones</strong><span>Posición, escala y alineación construyen jerarquía y permiten responder a distintos tamaños.</span></div>
+          <div class="graphics-row"><strong>Animación</strong><span>El movimiento puede explicar continuidad y estado; también puede distraer o causar malestar.</span></div>
+          <div class="graphics-row"><strong>Renderizado</strong><span>Latencia, estabilidad y tasa de cuadros influyen en control, confianza y comodidad.</span></div>
+          <div class="graphics-row"><strong>Interfaces 3D</strong><span>Profundidad, oclusión, perspectiva y selección espacial añaden oportunidades y carga cognitiva.</span></div>
+        </article>
+        <aside class="practice-card">
+          <h3>Mini reto de observación</h3>
+          <ol class="practice-list">
+            <li>Elige una aplicación que uses con frecuencia.</li>
+            <li>Define una tarea concreta, por ejemplo: “exportar una imagen”.</li>
+            <li>Registra cuántos pasos exige y dónde dudas.</li>
+            <li>Señala una decisión visual y una decisión de flujo que influyan en el resultado.</li>
+            <li>Propón un cambio y explica qué evidencia confirmaría que funciona.</li>
+          </ol>
+          <p class="prompt"><strong>Evita:</strong> “lo cambiaría porque se ve mejor”. Prefiere: “lo cambiaría para que la acción principal se encuentre antes; lo comprobaría midiendo tiempo y errores”.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="lista-titulo">
+      <div class="section-head">
+        <p class="section-kicker">06 · Revisa</p>
+        <h2 id="lista-titulo">Lista breve antes de entregar</h2>
+      </div>
+      <div class="checklist">
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>La pantalla responde a una tarea y a un contexto definidos.</span></div>
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>La acción principal se distingue sin competir con todas las demás.</span></div>
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>Etiquetas, agrupación y navegación reducen la necesidad de recordar.</span></div>
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>Los estados de espera, éxito y error tienen retroalimentación clara.</span></div>
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>Texto y controles conservan contraste, foco y tamaño operable.</span></div>
+        <div class="check-item"><span class="check-mark" aria-hidden="true">✓</span><span>El prototipo fue observado con tareas y criterios de éxito.</span></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="fuentes-titulo">
+      <div class="section-head">
+        <p class="section-kicker">Fuentes para profundizar</p>
+        <h2 id="fuentes-titulo">Referencias esenciales</h2>
+      </div>
+      <ul class="sources">
+        <li>International Organization for Standardization. <a href="https://www.iso.org/standard/63500.html" target="_blank" rel="noopener noreferrer">ISO 9241-11:2018: Usability — Definitions and concepts</a>.</li>
+        <li>International Organization for Standardization. <a href="https://www.iso.org/standard/77520.html" target="_blank" rel="noopener noreferrer">ISO 9241-210:2019: Human-centred design for interactive systems</a>.</li>
+        <li>World Wide Web Consortium. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">Web Content Accessibility Guidelines (WCAG) 2.2</a>.</li>
+        <li>Nielsen, J. <a href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank" rel="noopener noreferrer">10 Usability Heuristics for User Interface Design</a>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span><strong>Computación Gráfica</strong> · UI/UX</span>
+      <span>Andrés Felipe Rámirez Correa</span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const fixes = {
+        hierarchy: {
+          points: 14,
+          note: 'Jerarquía: el título, la información de apoyo y la acción principal adoptan pesos diferentes; ahora la lectura tiene un recorrido.'
+        },
+        contrast: {
+          points: 15,
+          note: 'Contraste: texto, fondo y acción principal se separan por luminancia. La información deja de depender de tonos casi iguales.'
+        },
+        grouping: {
+          points: 13,
+          note: 'Agrupación: proximidad y espacio revelan qué datos pertenecen juntos y separan captura, resumen y acciones.'
+        },
+        consistency: {
+          points: 12,
+          note: 'Consistencia: controles equivalentes comparten forma, proporción y tratamiento; se reduce el aprendizaje innecesario.'
+        },
+        feedback: {
+          points: 14,
+          note: 'Retroalimentación: la interfaz comunica disponibilidad y el siguiente resultado esperado, en lugar de dejar a la persona adivinando.'
+        },
+        accessibility: {
+          points: 14,
+          note: 'Accesibilidad: etiquetas persistentes, objetivos más amplios y una señal textual adicional hacen la operación más robusta.'
+        }
+      };
+
+      const app = document.querySelector('#mockApp');
+      const buttons = [...document.querySelectorAll('.principle-button')];
+      const score = document.querySelector('#scoreValue');
+      const ring = document.querySelector('#scoreRing');
+      const label = document.querySelector('#scoreLabel');
+      const note = document.querySelector('#changeNote');
+
+      function updateLab(message) {
+        let total = 18;
+        let active = 0;
+        buttons.forEach((button) => {
+          const key = button.dataset.fix;
+          const enabled = button.getAttribute('aria-pressed') === 'true';
+          app.classList.toggle(`fix-${key}`, enabled);
+          button.querySelector('.switch-state').textContent = enabled ? 'Activa' : 'Inactiva';
+          if (enabled) {
+            total += fixes[key].points;
+            active += 1;
+          }
+        });
+        score.textContent = total;
+        ring.style.setProperty('--score-angle', `${total}%`);
+        label.textContent = active === 0
+          ? 'La tarea exige demasiado esfuerzo visual.'
+          : active < 3
+            ? 'Hay avances, pero persisten señales ambiguas.'
+            : active < 6
+              ? 'La tarea ya se percibe más clara y predecible.'
+              : 'La propuesta está lista para validarse con personas.';
+        if (message) note.textContent = message;
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = button.getAttribute('aria-pressed') !== 'true';
+          button.setAttribute('aria-pressed', String(next));
+          const key = button.dataset.fix;
+          updateLab(next ? fixes[key].note : `Se retiró la mejora de ${button.querySelector('.principle-name').textContent.toLowerCase()}. Compara qué información vuelve a perder claridad.`);
+        });
+      });
+
+      document.querySelector('#applyAll').addEventListener('click', () => {
+        buttons.forEach((button) => button.setAttribute('aria-pressed', 'true'));
+        updateLab('Conjunto completo: la pantalla es más legible y predecible. El siguiente paso no es declararla “perfecta”, sino probar una tarea real con personas representativas.');
+      });
+
+      document.querySelector('#resetAll').addEventListener('click', () => {
+        buttons.forEach((button) => button.setAttribute('aria-pressed', 'false'));
+        updateLab('Interfaz reiniciada. Activa una mejora y observa qué decisión visual cambia la comprensión de la tarea.');
+      });
+
+      const filterButtons = [...document.querySelectorAll('.filter-button')];
+      const cards = [...document.querySelectorAll('.principle-card')];
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          const filter = button.dataset.filter;
+          cards.forEach((card) => {
+            const categories = card.dataset.category.split(' ');
+            card.hidden = filter !== 'all' && !categories.includes(filter);
+          });
+        });
+      });
+
+      updateLab();
+    })();
+  </script>
+</body>
+</html>

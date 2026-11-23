@@ -15,7 +15,7 @@ import { gameState } from "../state.js";
  * @param {boolean} allowDoubleJump - Enables double jump mechanic
  * @returns {import("kaboom").GameObj} The player game object
  */
-export function createPlayer(k, x = 100, y = 200, allowDoubleJump = true) {
+export function createPlayer(k, x = 100, y = 200, allowDoubleJump = true, maxFallY = null) {
   const player = k.add([
     k.sprite("player", { anim: "idle" }),
     k.pos(x, y),
@@ -214,7 +214,9 @@ export function createPlayer(k, x = 100, y = 200, allowDoubleJump = true) {
     if (player.isDead) return;
 
     // Hazard: Falling into bottomless pit is an INSTAKILL (Req-4)
-    if (player.pos.y > 380) {
+    // Level 1 & 2 have map height 360 (pit > 380). Level 3 (Tower) has map height 1680 (pit > 1720).
+    const deathY = maxFallY ?? (gameState.currentLevel === 3 ? 1720 : 380);
+    if (player.pos.y > deathY) {
       player.die();
       return;
     }

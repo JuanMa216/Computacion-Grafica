@@ -29,10 +29,10 @@ export function createOrc(k, x, y, patrolRange = 70) {
   const orc = k.add([
     k.sprite("orc", { anim: "walk" }),
     k.pos(x, y),
-    // Scale orc to 24px (1 map block tall)
-    k.scale(24 / 18),
-    // Precision hitbox aligned to feet (y=+10 in 100x100 frame) and head (y=-8)
-    k.area({ shape: new k.Rect(k.vec2(0, 1), 16, 18) }),
+    // Scale orc to 24px (1 map block tall, matching Mili)
+    k.scale(24 / 16),
+    // Precision hitbox aligned to feet (y=+7 in 100x100 frame) and head (y=-9)
+    k.area({ shape: new k.Rect(k.vec2(0, -1), 16, 16) }),
     k.body(),
     k.anchor("center"),
     k.z(6),
