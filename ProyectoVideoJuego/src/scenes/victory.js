@@ -104,12 +104,14 @@ export function initVictory(k) {
         k.pos(k.width() / 2, 256),
         k.anchor("center"),
         k.color(100, 255, 180),
+
+
         k.fixed(),
         k.z(11)
       ]);
     } else {
       k.add([
-        k.text(`¿Nivel Secreto? Consigue **** pts para desbloquear el Easter Egg`, {
+        k.text(`¿Nivel Secreto? Consigue ***** pts para desbloquear el Easter Egg`, {
           font: "pressstart",
           size: 6
         }),

@@ -10,7 +10,7 @@ import { initGameOver } from "./scenes/gameover.js";
 import { initSecret } from "./scenes/secret.js";
 
 // --- 1. Load Character Sprites ---
-k.loadSprite("player", "/sprites/player/mili.png", {
+k.loadSprite("player", "sprites/player/mili.png", {
   sliceX: 10,
   sliceY: 8,
   anims: {
@@ -25,7 +25,7 @@ k.loadSprite("player", "/sprites/player/mili.png", {
   }
 });
 
-k.loadSprite("slime", "/sprites/enemies/slime.png", {
+k.loadSprite("slime", "sprites/enemies/slime.png", {
   sliceX: 10,
   sliceY: 8,
   anims: {
@@ -39,7 +39,7 @@ k.loadSprite("slime", "/sprites/enemies/slime.png", {
   }
 });
 
-k.loadSprite("orc", "/sprites/enemies/orc/Orc.png", {
+k.loadSprite("orc", "sprites/enemies/orc/Orc.png", {
   sliceX: 8,
   sliceY: 6,
   anims: {
@@ -51,7 +51,7 @@ k.loadSprite("orc", "/sprites/enemies/orc/Orc.png", {
   }
 });
 
-k.loadSprite("demon", "/sprites/boss/demon/Demon_A.png", {
+k.loadSprite("demon", "sprites/boss/demon/Demon_A.png", {
   sliceX: 8,
   sliceY: 6,
   anims: {
@@ -66,53 +66,53 @@ k.loadSprite("demon", "/sprites/boss/demon/Demon_A.png", {
 
 // --- 2. RottingPixels Dark Fantasy Medieval Tilesets ---
 // Castle (Level 1)
-k.loadSprite("stone_top", "/sprites/tiles/stone_top.png");
-k.loadSprite("stone_wall", "/sprites/tiles/stone_wall.png");
-k.loadSprite("wood_platform", "/sprites/tiles/wood_platform.png");
-k.loadSprite("castle_spikes", "/sprites/hazards/castle_spikes.png");
+k.loadSprite("stone_top", "sprites/tiles/stone_top.png");
+k.loadSprite("stone_wall", "sprites/tiles/stone_wall.png");
+k.loadSprite("wood_platform", "sprites/tiles/wood_platform.png");
+k.loadSprite("castle_spikes", "sprites/hazards/castle_spikes.png");
 
 // Cave (Level 2)
-k.loadSprite("cave_top", "/sprites/tiles/cave_top.png");
-k.loadSprite("cave_wall", "/sprites/tiles/cave_wall.png");
-k.loadSprite("cave_spikes", "/sprites/hazards/cave_spikes.png");
+k.loadSprite("cave_top", "sprites/tiles/cave_top.png");
+k.loadSprite("cave_wall", "sprites/tiles/cave_wall.png");
+k.loadSprite("cave_spikes", "sprites/hazards/cave_spikes.png");
 
 // Dungeon / Fortress (Level 3)
-k.loadSprite("dungeon_top", "/sprites/tiles/dungeon_top.png");
-k.loadSprite("dungeon_wall", "/sprites/tiles/dungeon_wall.png");
-k.loadSprite("dungeon_platform", "/sprites/tiles/dungeon_platform.png");
-k.loadSprite("dungeon_platform_2x", "/sprites/tiles/dungeon_platform_2x.png");
-k.loadSprite("dungeon_spikes", "/sprites/hazards/dungeon_spikes.png");
+k.loadSprite("dungeon_top", "sprites/tiles/dungeon_top.png");
+k.loadSprite("dungeon_wall", "sprites/tiles/dungeon_wall.png");
+k.loadSprite("dungeon_platform", "sprites/tiles/dungeon_platform.png");
+k.loadSprite("dungeon_platform_2x", "sprites/tiles/dungeon_platform_2x.png");
+k.loadSprite("dungeon_spikes", "sprites/hazards/dungeon_spikes.png");
 
 // Collectibles, Items & Props
-k.loadSprite("coin", "/sprites/items/coin.png");
-k.loadSprite("gem", "/sprites/items/gem.png");
-k.loadSprite("key", "/sprites/items/key.png");
-k.loadSprite("book_red", "/sprites/items/book_red.png");
-k.loadSprite("book_green", "/sprites/items/book_green.png");
-k.loadSprite("book_blue", "/sprites/items/book_blue.png");
-k.loadSprite("door_closed", "/sprites/tiles/door_closed.png");
-k.loadSprite("door_open", "/sprites/tiles/door_open.png");
-k.loadSprite("spring", "/sprites/tiles/spring.png");
-k.loadSprite("flower_vase", "/sprites/decorations/flower_vase.png");
-k.loadSprite("heart_full", "/sprites/items/heart_full.png");
-k.loadSprite("heart_empty", "/sprites/items/heart_empty.png");
+k.loadSprite("coin", "sprites/items/coin.png");
+k.loadSprite("gem", "sprites/items/gem.png");
+k.loadSprite("key", "sprites/items/key.png");
+k.loadSprite("book_red", "sprites/items/book_red.png");
+k.loadSprite("book_green", "sprites/items/book_green.png");
+k.loadSprite("book_blue", "sprites/items/book_blue.png");
+k.loadSprite("door_closed", "sprites/tiles/door_closed.png");
+k.loadSprite("door_open", "sprites/tiles/door_open.png");
+k.loadSprite("spring", "sprites/tiles/spring.png");
+k.loadSprite("flower_vase", "sprites/decorations/flower_vase.png");
+k.loadSprite("heart_full", "sprites/items/heart_full.png");
+k.loadSprite("heart_empty", "sprites/items/heart_empty.png");
 
 // --- 3. Atmospheric Dark Fantasy Backgrounds ---
-k.loadSprite("bg_level1", "/sprites/backgrounds/bg_level1.png");
-k.loadSprite("bg_level2", "/sprites/backgrounds/bg_level2.png");
-k.loadSprite("bg_level3", "/sprites/backgrounds/bg_level3.png");
-k.loadSprite("bg_secret", "/sprites/backgrounds/easter_egg.jpg");
+k.loadSprite("bg_level1", "sprites/backgrounds/bg_level1.png");
+k.loadSprite("bg_level2", "sprites/backgrounds/bg_level2.png");
+k.loadSprite("bg_level3", "sprites/backgrounds/bg_level3.png");
+k.loadSprite("bg_secret", "sprites/backgrounds/easter_egg.jpg");
 
 // --- 4. Retro Audio ---
-k.loadSound("jump", "/sounds/jump.wav");
-k.loadSound("coin", "/sounds/coin.wav");
-k.loadSound("hit", "/sounds/hit.wav");
-k.loadSound("spring", "/sounds/spring.wav");
-k.loadSound("win", "/sounds/win.wav");
+k.loadSound("jump", "sounds/jump.wav");
+k.loadSound("coin", "sounds/coin.wav");
+k.loadSound("hit", "sounds/hit.wav");
+k.loadSound("spring", "sounds/spring.wav");
+k.loadSound("win", "sounds/win.wav");
 
 // --- 5. Retro Pixel Fonts ---
-k.loadFont("pressstart", "/fonts/PressStart2P.ttf");
-k.loadFont("vt323", "/fonts/VT323.ttf");
+k.loadFont("pressstart", "fonts/PressStart2P.ttf");
+k.loadFont("vt323", "fonts/VT323.ttf");
 
 // --- 6. Scene Management ---
 initLevel1(k);
